@@ -7,12 +7,6 @@ import { createClient } from "@/lib/supabase/client";
 const inputClass =
   "w-full rounded-lg border border-white/10 bg-ink px-4 py-3.5 text-sm text-text placeholder:text-text-faint outline-none transition focus:border-accent-2/60 focus:ring-1 focus:ring-accent-2/60";
 
-const riskOptions = [
-  { value: "low", label: "Low risk" },
-  { value: "medium", label: "Medium risk" },
-  { value: "high", label: "High risk" },
-];
-
 export default function SignUpForm() {
   const router = useRouter();
   const supabase = createClient();
@@ -20,7 +14,6 @@ export default function SignUpForm() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [riskPreference, setRiskPreference] = useState("low");
   const [status, setStatus] = useState("idle"); // idle | loading | check-email | error
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -35,7 +28,6 @@ export default function SignUpForm() {
       options: {
         data: {
           full_name: fullName,
-          risk_preference: riskPreference,
         },
       },
     });
@@ -112,34 +104,6 @@ export default function SignUpForm() {
           placeholder="At least 8 characters"
         />
       </div>
-
-      <fieldset>
-        <legend className="mb-1.5 block text-xs text-text-dim">
-          Risk preference
-        </legend>
-        <div className="grid grid-cols-3 gap-2">
-          {riskOptions.map((opt) => (
-            <label
-              key={opt.value}
-              className={`cursor-pointer rounded-lg border px-3 py-2.5 text-center text-xs transition ${
-                riskPreference === opt.value
-                  ? "border-accent-2/60 bg-accent/10 text-accent-2"
-                  : "border-white/10 text-text-dim hover:border-white/20"
-              }`}
-            >
-              <input
-                type="radio"
-                name="risk"
-                value={opt.value}
-                checked={riskPreference === opt.value}
-                onChange={() => setRiskPreference(opt.value)}
-                className="sr-only"
-              />
-              {opt.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
 
       {status === "error" && (
         <p className="text-sm text-mid">{errorMessage}</p>

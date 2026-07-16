@@ -44,13 +44,9 @@ export default async function WelcomePage() {
               Welcome{profile?.full_name ? `, ${profile.full_name}` : ""}.
             </h1>
             <p className="mt-5 leading-relaxed text-text-dim">
-              Your account is set up with a{" "}
-              <span className="font-mono-tight text-accent-2">
-                {profile?.risk_preference ?? "low"}
-              </span>{" "}
-              risk preference. There&rsquo;s no live trading or dashboard yet
-              — we&rsquo;ll email {user.email} the moment your access to the
-              live dashboard and broker connection opens up.
+              Your account is set up. There&rsquo;s no live trading or
+              dashboard yet — we&rsquo;ll email {user.email} the moment your
+              access to the live dashboard and broker connection opens up.
             </p>
             <div className="mt-9 grid grid-cols-3 gap-3 text-left">
               <RoadmapItem label="Dashboard" status="Coming soon" />

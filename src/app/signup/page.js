@@ -11,7 +11,7 @@ export default function SignUpPage() {
     <AuthShell
       eyebrow="Get started"
       title="Request access"
-      subtitle="This sets up your account and starting risk preference. Live trading connects once your access opens."
+      subtitle="This sets up your account. Live trading connects once your access opens."
       footer={
         <>
           Already have an account?{" "}
