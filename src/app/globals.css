@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #060709;
+  --color-panel: #0b0e13;
+  --color-panel-strong: #0e1633;
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-line-soft: rgba(255, 255, 255, 0.06);
+  --color-text: #eef2f8;
+  --color-text-muted: #aeb6c2;
+  --color-text-dim: #9aa2ae;
+  --color-text-faint: #6b7480;
+  --color-accent: #1e66ff;
+  --color-accent-2: #5fa0ff;
+  --color-low: #ef9f27;
+  --color-mid: #e24b4a;
+  --color-high: #1d9e75;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-panel: var(--color-panel);
+  --color-panel-strong: var(--color-panel-strong);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-dim: var(--color-text-dim);
+  --color-text-faint: var(--color-text-faint);
+  --color-accent: var(--color-accent);
+  --color-accent-2: var(--color-accent-2);
+  --color-low: var(--color-low);
+  --color-mid: var(--color-mid);
+  --color-high: var(--color-high);
+  --font-display: var(--font-saira);
+  --font-mono: var(--font-jbmono);
+}
+
+html {
+  background: var(--color-ink);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-saira), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(30, 102, 255, 0.35);
+  color: #fff;
+}
+
+.eyebrow {
+  font-family: var(--font-jbmono), ui-monospace, monospace;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.font-mono-tight {
+  font-family: var(--font-jbmono), ui-monospace, monospace;
+}
+
+/* Premium card surface: quiet by default, lifts on hover */
+.surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 40%),
+    var(--color-panel);
+  border: 1px solid var(--color-line);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.surface:hover {
+  border-color: rgba(95, 160, 255, 0.3);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  box-shadow: 0 0 0 1px rgba(95, 160, 255, 0.25), 0 12px 30px -10px rgba(30, 102, 255, 0.55);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.btn-primary:hover {
+  background: var(--color-accent-2);
+  box-shadow: 0 0 0 1px rgba(95, 160, 255, 0.4), 0 16px 36px -8px rgba(30, 102, 255, 0.7);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Signature hero motif: level lines + scanning sweep */
+@keyframes gridDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 60px, 80px 0; }
+}
+@keyframes lvlPulse {
+  0%, 100% { opacity: 0.14; }
+  50% { opacity: 0.75; }
+}
+@keyframes sweepX {
+  0% { transform: translateX(-10%); }
+  100% { transform: translateX(110%); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.grid-field {
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0, transparent 39px, rgba(95,160,255,0.07) 39px, rgba(95,160,255,0.07) 40px),
+    repeating-linear-gradient(to right, transparent 0, transparent 59px, rgba(95,160,255,0.04) 59px, rgba(95,160,255,0.04) 60px);
+  animation: gridDrift 16s linear infinite;
+}
+.level-line {
+  animation: lvlPulse 5s ease-in-out infinite;
+  box-shadow: 0 0 18px 1px rgba(95, 160, 255, 0.7);
+}
+.sweep-line {
+  animation: sweepX 9s linear infinite;
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-field, .level-line, .sweep-line, .rise, html {
+    animation: none !important;
+    scroll-behavior: auto;
+  }
+}
