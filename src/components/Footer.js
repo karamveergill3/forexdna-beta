@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-ink">
@@ -9,9 +11,14 @@ export default function Footer() {
             risk and may not be suitable for every investor; you could lose
             some or all of your deposit.
           </p>
-          <span className="font-mono-tight shrink-0">
-            &copy; {new Date().getFullYear()} ForexDNA
-          </span>
+          <div className="flex shrink-0 flex-col items-start gap-3 sm:items-end">
+            <Link href="/faq" className="hover:text-text">
+              FAQ
+            </Link>
+            <span className="font-mono-tight">
+              &copy; {new Date().getFullYear()} ForexDNA
+            </span>
+          </div>
         </div>
       </div>
     </footer>

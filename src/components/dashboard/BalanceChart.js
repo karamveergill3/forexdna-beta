@@ -18,8 +18,8 @@ export default function BalanceChart({ data, startingBalance }) {
         <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="balanceFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--color-accent-2)" stopOpacity={0.35} />
-              <stop offset="100%" stopColor="var(--color-accent-2)" stopOpacity={0} />
+              <stop offset="0%" stopColor="var(--color-high)" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="var(--color-high)" stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
@@ -66,8 +66,8 @@ export default function BalanceChart({ data, startingBalance }) {
           <Area
             type="monotone"
             dataKey="balance"
-            stroke="var(--color-accent-2)"
-            strokeWidth={2}
+            stroke="var(--color-high)"
+            strokeWidth={2.5}
             fill="url(#balanceFill)"
           />
         </AreaChart>

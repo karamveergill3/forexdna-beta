@@ -7,12 +7,26 @@ export default function Nav() {
         <Link href="/" className="text-xl font-black tracking-tight">
           Forex<span className="text-accent-2">DNA</span>
         </Link>
-        <Link
-          href="/signup"
-          className="btn-primary rounded-lg px-6 py-2.5 text-sm font-semibold tracking-wide text-white"
-        >
-          Request access
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/faq"
+            className="hidden text-sm text-text-dim transition hover:text-text sm:inline"
+          >
+            FAQ
+          </Link>
+          <Link
+            href="/login"
+            className="text-sm text-text-dim transition hover:text-text"
+          >
+            Sign in
+          </Link>
+          <Link
+            href="/signup"
+            className="btn-primary rounded-lg px-6 py-2.5 text-sm font-semibold tracking-wide text-white"
+          >
+            Request access
+          </Link>
+        </div>
       </div>
     </header>
   );

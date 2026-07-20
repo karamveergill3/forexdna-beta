@@ -9,7 +9,7 @@ import {
   closedTrades,
   dailyPnl,
   statistics,
-  riskStackLimits,
+  riskStack,
   disciplineScore,
 } from "./sampleData";
 
@@ -17,6 +17,12 @@ function fmt(n) {
   const sign = n < 0 ? "-" : "";
   return `${sign}$${Math.abs(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
+
+const toneColor = {
+  high: "var(--color-high)",
+  accent: "var(--color-accent-2)",
+  mid: "var(--color-mid)",
+};
 
 export default function DashboardPreview() {
   return (
@@ -30,22 +36,31 @@ export default function DashboardPreview() {
       </div>
 
       {/* Top row: balance / equity / unrealized */}
-      <div className="grid grid-cols-3 gap-3">
-        <StatBox label="Balance" value={fmt(sampleAccount.balance)} />
-        <StatBox label="Equity" value={fmt(sampleAccount.equity)} />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <StatBox label="Balance" value={fmt(sampleAccount.balance)} tone="high" />
+        <StatBox label="Equity" value={fmt(sampleAccount.equity)} tone="high" />
         <StatBox label="Unrealized P&L" value={fmt(sampleAccount.unrealizedPnl)} />
       </div>
 
       {/* Chart + account overview */}
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
         <div className="surface rounded-xl p-6">
-          <div className="mb-2 text-sm font-semibold">Balance history</div>
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-sm font-semibold">Balance history</span>
+            <span
+              className="font-mono-tight text-sm font-semibold"
+              style={{ color: "var(--color-high)" }}
+            >
+              +{(((sampleAccount.balance - sampleAccount.startingBalance) / sampleAccount.startingBalance) * 100).toFixed(1)}%
+            </span>
+          </div>
           <BalanceChart data={balanceCurve} startingBalance={sampleAccount.startingBalance} />
         </div>
 
         <div className="surface rounded-xl p-6">
           <div className="mb-4 text-sm font-semibold">Account overview</div>
           <dl className="flex flex-col gap-3 text-sm">
+            <Row label="Account number" value={sampleAccount.accountNumber} />
             <Row label="Strategy" value={sampleAccount.strategy} />
             <Row label="Connected since" value={sampleAccount.connectedSince} />
             <Row label="Starting balance" value={fmt(sampleAccount.startingBalance)} />
@@ -74,8 +89,11 @@ export default function DashboardPreview() {
                   <tr key={t.id} className="border-t border-white/8">
                     <td className="py-3 pr-4">
                       <span
-                        className="font-mono-tight text-xs font-semibold"
-                        style={{ color: t.side === "Buy" ? "var(--color-high)" : "var(--color-mid)" }}
+                        className="rounded-full px-2 py-0.5 font-mono-tight text-[11px] font-semibold"
+                        style={{
+                          color: t.side === "Buy" ? "var(--color-high)" : "var(--color-mid)",
+                          background: t.side === "Buy" ? "rgba(29,158,117,0.12)" : "rgba(226,75,74,0.12)",
+                        }}
                       >
                         {t.side}
                       </span>
@@ -110,10 +128,10 @@ export default function DashboardPreview() {
           <StatBox small label="Avg loss" value={fmt(statistics.avgLoss)} tone="mid" />
           <StatBox small label="Trades" value={statistics.numberOfTrades} />
           <StatBox small label="Lots" value={statistics.lots} />
-          <StatBox small label="Sharpe ratio" value={statistics.sharpe} />
-          <StatBox small label="Avg RRR" value={statistics.avgRRR} />
-          <StatBox small label="Expectancy" value={fmt(statistics.expectancy)} tone="mid" />
-          <StatBox small label="Profit factor" value={statistics.profitFactor} />
+          <StatBox small label="Sharpe ratio" value={statistics.sharpe} tone="high" />
+          <StatBox small label="Avg RRR" value={statistics.avgRRR} tone="high" />
+          <StatBox small label="Expectancy" value={fmt(statistics.expectancy)} tone="high" />
+          <StatBox small label="Profit factor" value={statistics.profitFactor} tone="high" />
         </div>
       </div>
 
@@ -125,19 +143,24 @@ export default function DashboardPreview() {
         </div>
 
         <div className="surface rounded-xl p-6">
-          <div className="mb-4 text-sm font-semibold">Risk stack limits</div>
-          <div className="flex flex-col divide-y divide-white/8">
-            {riskStackLimits.map((r) => (
-              <div key={r.label} className="flex items-center justify-between py-3 text-sm">
-                <span className="text-text-dim">{r.label}</span>
-                <div className="flex items-center gap-4">
-                  <span className="font-mono-tight text-xs text-text-faint">Limit {r.limit}</span>
+          <div className="mb-5 text-sm font-semibold">Risk stack</div>
+          <div className="flex flex-col gap-5">
+            {riskStack.map((r) => (
+              <div key={r.label}>
+                <div className="mb-2 flex items-center justify-between text-sm">
+                  <span className="text-text-dim">{r.label}</span>
                   <span
-                    className="font-mono-tight text-sm font-semibold"
-                    style={{ color: r.breached ? "var(--color-mid)" : "var(--color-high)" }}
+                    className="font-mono-tight text-xs font-semibold"
+                    style={{ color: toneColor[r.tone] }}
                   >
-                    {r.current}
+                    {r.pct}%
                   </span>
+                </div>
+                <div className="h-2 w-full overflow-hidden rounded-full bg-ink">
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${r.pct}%`, background: toneColor[r.tone] }}
+                  />
                 </div>
               </div>
             ))}
@@ -149,8 +172,7 @@ export default function DashboardPreview() {
 }
 
 function StatBox({ label, value, small, tone }) {
-  const color =
-    tone === "high" ? "var(--color-high)" : tone === "mid" ? "var(--color-mid)" : "var(--color-text)";
+  const color = tone ? toneColor[tone] : "var(--color-text)";
   return (
     <div className={`surface rounded-lg ${small ? "p-3" : "p-4"}`}>
       <div className="eyebrow text-[10px] text-text-faint">{label}</div>
@@ -166,9 +188,9 @@ function StatBox({ label, value, small, tone }) {
 
 function Row({ label, value }) {
   return (
-    <div className="flex items-center justify-between">
-      <dt className="text-text-faint">{label}</dt>
-      <dd className="font-mono-tight text-text">{value}</dd>
+    <div className="flex items-center justify-between gap-3">
+      <dt className="shrink-0 text-text-faint">{label}</dt>
+      <dd className="truncate font-mono-tight text-text">{value}</dd>
     </div>
   );
 }

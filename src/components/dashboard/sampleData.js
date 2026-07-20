@@ -3,8 +3,9 @@
 // is connected.
 
 export const sampleAccount = {
-  balance: 8967.91,
-  equity: 8967.91,
+  accountNumber: "FDX-2025-01934",
+  balance: 13496.32,
+  equity: 13496.32,
   unrealizedPnl: 0,
   startingBalance: 10000,
   connectedSince: "5 Sep 2025",
@@ -14,59 +15,69 @@ export const sampleAccount = {
 
 export const balanceCurve = [
   { t: "5 Sep", balance: 10000 },
-  { t: "8 Sep", balance: 10127 },
-  { t: "9 Sep", balance: 10284 },
-  { t: "10 Sep", balance: 9975 },
-  { t: "11 Sep", balance: 10054 },
-  { t: "12 Sep", balance: 10325 },
-  { t: "15 Sep", balance: 9945 },
-  { t: "16 Sep", balance: 9582 },
-  { t: "17 Sep", balance: 8968 },
+  { t: "8 Sep", balance: 10145 },
+  { t: "9 Sep", balance: 10420 },
+  { t: "10 Sep", balance: 10310 },
+  { t: "11 Sep", balance: 10680 },
+  { t: "12 Sep", balance: 11150 },
+  { t: "15 Sep", balance: 11020 },
+  { t: "16 Sep", balance: 11540 },
+  { t: "17 Sep", balance: 12100 },
+  { t: "18 Sep", balance: 11890 },
+  { t: "19 Sep", balance: 12430 },
+  { t: "22 Sep", balance: 12950 },
+  { t: "23 Sep", balance: 13496 },
 ];
 
 export const closedTrades = [
-  { id: "144178959", side: "Sell", closeTime: "17 Sep, 21:02", volume: 0.5, symbol: "GBPUSD", pnl: -620.71, pips: -42, duration: "00:00:51" },
-  { id: "144128383", side: "Buy", closeTime: "16 Sep, 17:32", volume: 0.5, symbol: "EURUSD", pnl: -362.98, pips: -28, duration: "00:17:36" },
-  { id: "144042872", side: "Buy", closeTime: "15 Sep, 04:01", volume: 0.5, symbol: "EURUSD", pnl: -380.56, pips: -31, duration: "01:00:46" },
-  { id: "144026201", side: "Buy", closeTime: "12 Sep, 17:01", volume: 0.5, symbol: "USDJPY", pnl: 110.09, pips: 14, duration: "00:46:36" },
-  { id: "143995557", side: "Buy", closeTime: "12 Sep, 04:31", volume: 0.5, symbol: "USDJPY", pnl: 160.86, pips: 19, duration: "09:16:44" },
-  { id: "143978943", side: "Buy", closeTime: "11 Sep, 15:09", volume: 0.5, symbol: "EURUSD", pnl: 78.38, pips: 9, duration: "00:03:35" },
+  { id: "144312881", side: "Buy", closeTime: "23 Sep, 14:12", volume: 0.6, symbol: "EURUSD", pnl: 546.20, pips: 44, duration: "02:10:12" },
+  { id: "144287654", side: "Buy", closeTime: "22 Sep, 09:41", volume: 0.6, symbol: "GBPUSD", pnl: 520.15, pips: 38, duration: "01:05:22" },
+  { id: "144255120", side: "Sell", closeTime: "19 Sep, 17:02", volume: 0.5, symbol: "USDJPY", pnl: 540.30, pips: 46, duration: "00:42:10" },
+  { id: "144230981", side: "Buy", closeTime: "18 Sep, 11:20", volume: 0.5, symbol: "EURUSD", pnl: -210.40, pips: -17, duration: "00:24:36" },
+  { id: "144198765", side: "Buy", closeTime: "17 Sep, 21:02", volume: 0.6, symbol: "GBPUSD", pnl: 560.71, pips: 42, duration: "01:00:51" },
+  { id: "144178959", side: "Buy", closeTime: "16 Sep, 17:32", volume: 0.6, symbol: "EURUSD", pnl: 520.98, pips: 41, duration: "00:17:36" },
+  { id: "144042872", side: "Sell", closeTime: "15 Sep, 04:01", volume: 0.5, symbol: "USDJPY", pnl: -130.56, pips: -12, duration: "01:00:46" },
+  { id: "144026201", side: "Buy", closeTime: "12 Sep, 17:01", volume: 0.5, symbol: "USDJPY", pnl: 470.09, pips: 39, duration: "00:46:36" },
+  { id: "143995557", side: "Buy", closeTime: "11 Sep, 04:31", volume: 0.5, symbol: "EURUSD", pnl: 370.86, pips: 29, duration: "09:16:44" },
+  { id: "143978943", side: "Sell", closeTime: "10 Sep, 15:09", volume: 0.5, symbol: "GBPUSD", pnl: -110.38, pips: -9, duration: "00:03:35" },
+  { id: "143961212", side: "Buy", closeTime: "9 Sep, 08:44", volume: 0.5, symbol: "EURUSD", pnl: 275.60, pips: 22, duration: "00:38:12" },
+  { id: "143944301", side: "Buy", closeTime: "8 Sep, 10:15", volume: 0.5, symbol: "USDJPY", pnl: 145.20, pips: 13, duration: "00:29:04" },
 ];
 
 export const dailyPnl = {
-  // day number -> { pnl, trades }
-  5: { pnl: 8.01, trades: 1 },
-  8: { pnl: 127.13, trades: 1 },
-  9: { pnl: 156.83, trades: 1 },
-  10: { pnl: -309.14, trades: 2 },
-  11: { pnl: 78.38, trades: 1 },
-  12: { pnl: 270.95, trades: 2 },
-  15: { pnl: -380.56, trades: 1 },
-  16: { pnl: -362.98, trades: 1 },
-  17: { pnl: -620.71, trades: 1 },
+  5: { pnl: 0, trades: 0 },
+  8: { pnl: 145.2, trades: 1 },
+  9: { pnl: 275.6, trades: 1 },
+  10: { pnl: -110.38, trades: 1 },
+  11: { pnl: 370.86, trades: 1 },
+  12: { pnl: 470.09, trades: 1 },
+  15: { pnl: -130.56, trades: 1 },
+  16: { pnl: 520.98, trades: 1 },
+  17: { pnl: 560.71, trades: 1 },
+  18: { pnl: -210.4, trades: 1 },
+  19: { pnl: 540.3, trades: 1 },
+  22: { pnl: 520.15, trades: 1 },
+  23: { pnl: 546.2, trades: 1 },
 };
 
 export const statistics = {
-  winRate: 63.64,
-  avgProfit: 100.77,
-  avgLoss: -434.37,
-  numberOfTrades: 11,
-  lots: 5.05,
-  sharpe: -0.37,
-  avgRRR: 0.23,
-  expectancy: -93.83,
-  profitFactor: 0.41,
+  winRate: 75.0,
+  avgProfit: 383.79,
+  avgLoss: -150.45,
+  numberOfTrades: 12,
+  lots: 6.4,
+  sharpe: 1.64,
+  avgRRR: 1.72,
+  expectancy: 191.53,
+  profitFactor: 2.55,
 };
 
-export const riskStackLimits = [
-  { label: "Max daily loss", limit: "-$500", current: "-$833.10", pct: -8.3, breached: true },
-  { label: "Max drawdown", limit: "-$1,000", current: "-$1,244.48", pct: -12.4, breached: true },
-  { label: "Monthly profit target", limit: "$500", current: "-$1,032.09", pct: -10.3, breached: true },
+// Usage against the risk stack's own internal caps — shown as progress,
+// not as a hard "limit" figure.
+export const riskStack = [
+  { label: "Daily loss buffer used", pct: 14, tone: "high" },
+  { label: "Drawdown buffer used", pct: 26, tone: "high" },
+  { label: "Monthly profit progress", pct: 68, tone: "accent" },
 ];
 
-export const disciplineScore = 73;
-
-export const buySell = [
-  { name: "Buy", value: -18 },
-  { name: "Sell", value: -1013 },
-];
+export const disciplineScore = 88;
