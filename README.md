@@ -23,9 +23,15 @@ just captures signups and each person's starting risk preference.
    that fills it in automatically on signup.
 4. Optional, recommended before real users sign up: go to **Authentication → Providers
    → Email** and decide whether you want "Confirm email" on. If it's on,
-   new users get a confirmation email before they can sign in (the signup
-   form already handles this — it shows a "check your email" message). If
-   you turn it off, people are signed in immediately after signup.
+   new users get a 6-digit code (see step 5 below) before they can sign in.
+   If you turn it off, people are signed in immediately after signup.
+5. **Required for the 6-digit signup code to work:** go to **Authentication
+   → Email Templates → Confirm signup**, and in the message body replace
+   `{{ .ConfirmationURL }}` with `{{ .Token }}` (or add it alongside).
+   Without this, Supabase's default template only sends a clickable link,
+   not a code — the signup form on this site expects a 6-digit code.
+   Sign-in (returning users) is unaffected either way — that's always
+   plain email + password.
 
 ## 2. Run it locally
 

@@ -14,7 +14,8 @@ export default function SignUpForm() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | loading | check-email | error
+  const [code, setCode] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | loading | verify | verifying | error | resent
   const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(e) {
@@ -44,16 +45,81 @@ export default function SignUpForm() {
       router.push("/welcome");
       router.refresh();
     } else {
-      setStatus("check-email");
+      setStatus("verify");
     }
   }
 
-  if (status === "check-email") {
+  async function handleVerify(e) {
+    e.preventDefault();
+    setStatus("verifying");
+    setErrorMessage("");
+
+    const { error } = await supabase.auth.verifyOtp({
+      email,
+      token: code,
+      type: "signup",
+    });
+
+    if (error) {
+      setStatus("verify");
+      setErrorMessage(error.message);
+      return;
+    }
+
+    router.push("/welcome");
+    router.refresh();
+  }
+
+  async function handleResend() {
+    setErrorMessage("");
+    const { error } = await supabase.auth.resend({ type: "signup", email });
+    setErrorMessage(error ? error.message : "New code sent.");
+  }
+
+  if (status === "verify" || status === "verifying") {
     return (
-      <div className="rounded-lg border border-accent-2/30 bg-accent/10 p-5 text-sm leading-relaxed text-text">
-        Check <span className="font-semibold">{email}</span> for a
-        confirmation link to finish setting up your account.
-      </div>
+      <form onSubmit={handleVerify} className="flex flex-col gap-4">
+        <div className="rounded-lg border border-accent-2/30 bg-accent/10 p-4 text-sm leading-relaxed text-text">
+          We sent a 6-digit code to <span className="font-semibold">{email}</span>.
+          Enter it below to finish setting up your account.
+        </div>
+
+        <div>
+          <label htmlFor="code" className="mb-1.5 block text-xs text-text-dim">
+            Verification code
+          </label>
+          <input
+            id="code"
+            type="text"
+            inputMode="numeric"
+            autoComplete="one-time-code"
+            required
+            maxLength={6}
+            value={code}
+            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+            className={`${inputClass} text-center text-2xl tracking-[0.5em]`}
+            placeholder="000000"
+          />
+        </div>
+
+        {errorMessage && <p className="text-sm text-mid">{errorMessage}</p>}
+
+        <button
+          type="submit"
+          disabled={status === "verifying" || code.length !== 6}
+          className="btn-primary mt-1 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
+        >
+          {status === "verifying" ? "Verifying…" : "Verify and continue"}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleResend}
+          className="text-sm text-text-dim hover:text-accent-2"
+        >
+          Resend code
+        </button>
+      </form>
     );
   }
 
