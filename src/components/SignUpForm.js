@@ -80,7 +80,7 @@ export default function SignUpForm() {
     return (
       <form onSubmit={handleVerify} className="flex flex-col gap-4">
         <div className="rounded-lg border border-accent-2/30 bg-accent/10 p-4 text-sm leading-relaxed text-text">
-          We sent a 6-digit code to <span className="font-semibold">{email}</span>.
+          We sent a code to <span className="font-semibold">{email}</span>.
           Enter it below to finish setting up your account.
         </div>
 
@@ -94,11 +94,11 @@ export default function SignUpForm() {
             inputMode="numeric"
             autoComplete="one-time-code"
             required
-            maxLength={6}
+            maxLength={8}
             value={code}
             onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-            className={`${inputClass} text-center text-2xl tracking-[0.5em]`}
-            placeholder="000000"
+            className={`${inputClass} text-center text-xl tracking-[0.3em]`}
+            placeholder="00000000"
           />
         </div>
 
@@ -106,7 +106,7 @@ export default function SignUpForm() {
 
         <button
           type="submit"
-          disabled={status === "verifying" || code.length !== 6}
+          disabled={status === "verifying" || code.length !== 8}
           className="btn-primary mt-1 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
         >
           {status === "verifying" ? "Verifying…" : "Verify and continue"}
