@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CandlestickArt from "./CandlestickArt";
 
 export default function Hero() {
   return (
@@ -17,6 +18,20 @@ export default function Hero() {
         <div className="sweep-line absolute top-0 h-full w-px bg-gradient-to-b from-transparent via-accent-2 to-transparent shadow-[0_0_26px_rgba(95,160,255,0.7)]" />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,transparent_15%,rgba(6,7,9,0.8)_100%)]" />
+
+      <div
+        className="rise pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] items-center pr-6 opacity-70 lg:flex xl:pr-10"
+        style={{
+          animationDelay: "0.3s",
+          maskImage: "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
+        }}
+      >
+        <div className="h-[38%] w-full">
+          <CandlestickArt />
+        </div>
+      </div>
 
       <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-14 md:px-10 md:pb-20 md:pt-20">
         <div className="rise eyebrow text-[12px] text-accent-2">
