@@ -37,7 +37,7 @@ export default function Hero() {
         <div className="rise eyebrow text-[12px] text-accent-2">
           Automated forex strategy
         </div>
-        <h1 className="rise mt-5 text-7xl font-black leading-[0.92] tracking-tighter md:text-[9rem]">
+        <h1 className="rise mt-5 text-6xl font-black leading-[0.92] tracking-tighter sm:text-7xl md:text-8xl lg:text-[9rem]">
           Forex<span className="text-accent-2">DNA</span>
         </h1>
         <p

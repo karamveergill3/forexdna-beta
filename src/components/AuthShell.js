@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function AuthShell({ eyebrow, title, subtitle, children, footer }) {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen w-full flex-col bg-ink">
       <div className="grid-field pointer-events-none absolute inset-0 opacity-50" />
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-6 md:px-10">
         <div className="flex items-center justify-between py-6">
