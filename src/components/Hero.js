@@ -5,42 +5,44 @@ import MeshBackground from "./MeshBackground";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-white/10">
-      <MeshBackground />
-      <div className="grid-field pointer-events-none absolute inset-0" />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] lg:block"
-        style={{
-          maskImage: "linear-gradient(to right, transparent, black 25%, black 92%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 25%, black 92%, transparent)",
-        }}
-      >
-        <div className="level-line absolute left-0 top-[30%] h-px w-full bg-accent-2" />
+    <section className="relative border-b border-white/10">
+      <div className="absolute inset-0 overflow-hidden">
+        <MeshBackground />
+        <div className="grid-field pointer-events-none absolute inset-0" />
         <div
-          className="level-line absolute left-0 top-[58%] h-px w-full bg-accent-2"
-          style={{ animationDelay: "1.6s" }}
-        />
-        <div
-          className="level-line absolute left-0 top-[78%] h-px w-full bg-accent-2"
-          style={{ animationDelay: "3.1s" }}
-        />
-        <div className="sweep-line absolute top-0 h-full w-px bg-gradient-to-b from-transparent via-accent-2 to-transparent shadow-[0_0_26px_rgba(95,160,255,0.7)]" />
-      </div>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,transparent_15%,rgba(6,7,9,0.8)_100%)]" />
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] lg:block"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 25%, black 92%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 25%, black 92%, transparent)",
+          }}
+        >
+          <div className="level-line absolute left-0 top-[30%] h-px w-full bg-accent-2" />
+          <div
+            className="level-line absolute left-0 top-[58%] h-px w-full bg-accent-2"
+            style={{ animationDelay: "1.6s" }}
+          />
+          <div
+            className="level-line absolute left-0 top-[78%] h-px w-full bg-accent-2"
+            style={{ animationDelay: "3.1s" }}
+          />
+          <div className="sweep-line absolute top-0 h-full w-px bg-gradient-to-b from-transparent via-accent-2 to-transparent shadow-[0_0_26px_rgba(95,160,255,0.7)]" />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,transparent_15%,rgba(6,7,9,0.8)_100%)]" />
 
-      {/* Candlestick art — desktop only */}
-      <div
-        className="rise pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] items-center pr-6 opacity-70 lg:flex xl:pr-10"
-        style={{
-          animationDelay: "0.3s",
-          maskImage: "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
-        }}
-      >
-        <div className="h-[38%] w-full scale-[2.5]">
-          <CandlestickArt />
+        {/* Candlestick art — desktop only */}
+        <div
+          className="rise pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] items-center pr-6 opacity-70 lg:flex xl:pr-10"
+          style={{
+            animationDelay: "0.3s",
+            maskImage: "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
+          }}
+        >
+          <div className="h-[38%] w-full scale-[2.5]">
+            <CandlestickArt />
+          </div>
         </div>
       </div>
 
