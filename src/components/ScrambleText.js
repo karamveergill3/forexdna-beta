@@ -66,6 +66,7 @@ export default function ScrambleText({
       className={className}
       style={{
         display: "inline-block",
+        overflow: "visible",
         filter: settled ? "blur(0px)" : "blur(2.5px)",
         opacity: settled ? 1 : 0.75,
         transition: "filter 0.5s ease-out, opacity 0.5s ease-out",
