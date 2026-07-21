@@ -72,6 +72,33 @@ function y(v) {
   return CHART_H - (v - MIN_V + PAD) * Y_SCALE;
 }
 
+// Moving average overlay — a simple rolling average of closes, drawn as a
+// self-animating line across the chart.
+const MA_WINDOW = 5;
+const maPoints = candles
+  .map((k, i) => {
+    if (i < MA_WINDOW - 1) return null;
+    let sum = 0;
+    for (let j = i - MA_WINDOW + 1; j <= i; j++) sum += candles[j].c;
+    const avg = sum / MA_WINDOW;
+    return [i * COL_W + COL_W / 2, y(avg)];
+  })
+  .filter(Boolean);
+
+const maPath = maPoints
+  .map(([px, py], i) => `${i === 0 ? "M" : "L"} ${px.toFixed(1)} ${py.toFixed(1)}`)
+  .join(" ");
+
+const maLength = maPoints.reduce((len, [px, py], i) => {
+  if (i === 0) return 0;
+  const [px0, py0] = maPoints[i - 1];
+  return len + Math.hypot(px - px0, py - py0);
+}, 0);
+
+// "Signal" points — the last candle of each consolidation, right before a
+// breakout. Marks where the strategy would be watching for an entry.
+const SIGNAL_INDICES = [12, 25, 43];
+
 export default function CandlestickArt() {
   return (
     <svg
@@ -106,6 +133,38 @@ export default function CandlestickArt() {
               fill={color}
               opacity={0.85}
               rx={0.8}
+            />
+          </g>
+        );
+      })}
+
+      <path
+        d={maPath}
+        fill="none"
+        stroke="rgba(255,255,255,0.8)"
+        strokeWidth={1.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="ma-line"
+        style={{ strokeDasharray: maLength, strokeDashoffset: maLength }}
+      />
+
+      {SIGNAL_INDICES.map((idx) => {
+        const k = candles[idx];
+        const cx = idx * COL_W + COL_W / 2;
+        const cy = y(k.c);
+        return (
+          <g key={idx}>
+            <circle cx={cx} cy={cy} r={1.8} fill="var(--color-accent-2)" />
+            <circle
+              cx={cx}
+              cy={cy}
+              r={1.8}
+              fill="none"
+              stroke="var(--color-accent-2)"
+              strokeWidth={1}
+              className="signal-ping"
+              style={{ transformBox: "fill-box", transformOrigin: "center" }}
             />
           </g>
         );

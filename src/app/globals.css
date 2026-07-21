@@ -157,10 +157,42 @@ body {
   animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+@keyframes particleDrift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  12% { opacity: 0.5; }
+  88% { opacity: 0.45; }
+  100% { transform: translate(var(--drift-x), -140px); opacity: 0; }
+}
+.particle-dot {
+  animation: particleDrift linear infinite;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+.ma-line {
+  animation: drawLine 3.2s ease-out 0.5s forwards;
+}
+
+@keyframes signalPing {
+  0% { transform: scale(1); opacity: 0.85; }
+  75%, 100% { transform: scale(3.4); opacity: 0; }
+}
+.signal-ping {
+  animation: signalPing 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grid-field, .level-line, .sweep-line, .rise, html {
     animation: none !important;
     scroll-behavior: auto;
+  }
+  .particle-dot, .signal-ping {
+    display: none !important;
+  }
+  .ma-line {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
   }
 }
 

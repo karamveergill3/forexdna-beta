@@ -1,6 +1,7 @@
 import { Saira, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeScript from "@/components/ThemeScript";
+import Particles from "@/components/Particles";
 
 const saira = Saira({
   variable: "--font-saira",
@@ -47,6 +48,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col antialiased bg-ink text-text">
         <div className="grain-overlay" />
+        <Particles />
         {children}
       </body>
     </html>
