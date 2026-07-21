@@ -63,12 +63,13 @@ const allValues = candles.flatMap((k) => [k.h, k.l]);
 const MIN_V = Math.min(...allValues);
 const MAX_V = Math.max(...allValues);
 const PAD = (MAX_V - MIN_V) * 0.06;
+const Y_SCALE = 8; // stretches candle height without widening them
 const CHART_W = COLS * COL_W;
-const CHART_H = MAX_V - MIN_V + PAD * 2;
+const CHART_H = (MAX_V - MIN_V + PAD * 2) * Y_SCALE;
 
-// Values run low->high in "price" terms; invert for SVG y (0 at top).
+// Values run low->high in "price" terms; invert + scale for SVG y (0 at top).
 function y(v) {
-  return CHART_H - (v - MIN_V + PAD);
+  return CHART_H - (v - MIN_V + PAD) * Y_SCALE;
 }
 
 export default function CandlestickArt() {
