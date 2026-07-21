@@ -1,5 +1,10 @@
 const DAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
+function fmt(n) {
+  const sign = n < 0 ? "-" : "+";
+  return `${sign}$${Math.abs(n).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+}
+
 export default function PnlCalendar({ month, year, dailyPnl }) {
   const firstOfMonth = new Date(year, month, 1);
   // Convert JS Sunday=0 to Monday-first index
@@ -12,6 +17,12 @@ export default function PnlCalendar({ month, year, dailyPnl }) {
   while (cells.length % 7 !== 0) cells.push(null);
 
   const monthLabel = firstOfMonth.toLocaleString("en-US", { month: "long", year: "numeric" });
+
+  // Monthly summary, computed from the same daily data driving the grid.
+  const entries = Object.values(dailyPnl).filter((e) => e.trades > 0);
+  const totalPnl = entries.reduce((sum, e) => sum + e.pnl, 0);
+  const bestDay = entries.reduce((best, e) => (e.pnl > (best?.pnl ?? -Infinity) ? e : best), null);
+  const tradingDays = entries.length;
 
   return (
     <div>
@@ -53,6 +64,32 @@ export default function PnlCalendar({ month, year, dailyPnl }) {
             </div>
           );
         })}
+      </div>
+
+      <div className="mt-6 grid grid-cols-3 gap-3 border-t border-white/10 pt-5">
+        <SummaryStat
+          label="Month total"
+          value={fmt(totalPnl)}
+          tone={totalPnl >= 0 ? "high" : "mid"}
+        />
+        <SummaryStat
+          label="Best day"
+          value={bestDay ? fmt(bestDay.pnl) : "—"}
+          tone="high"
+        />
+        <SummaryStat label="Trading days" value={tradingDays} />
+      </div>
+    </div>
+  );
+}
+
+function SummaryStat({ label, value, tone }) {
+  const color = tone === "high" ? "var(--color-high)" : tone === "mid" ? "var(--color-mid)" : "var(--color-text)";
+  return (
+    <div>
+      <div className="eyebrow text-[9px] text-text-faint">{label}</div>
+      <div className="mt-1 font-mono-tight text-sm font-semibold" style={{ color }}>
+        {value}
       </div>
     </div>
   );
