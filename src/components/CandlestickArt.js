@@ -63,7 +63,7 @@ const allValues = candles.flatMap((k) => [k.h, k.l]);
 const MIN_V = Math.min(...allValues);
 const MAX_V = Math.max(...allValues);
 const PAD = (MAX_V - MIN_V) * 0.06;
-const Y_SCALE = 8; // stretches candle height without widening them
+const Y_SCALE = 6; // stretches candle height without widening them
 const CHART_W = COLS * COL_W;
 const CHART_H = (MAX_V - MIN_V + PAD * 2) * Y_SCALE;
 

@@ -28,7 +28,7 @@ export default function TrustSection() {
         <h2 className="mt-4 max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
           Built, run, and re-tested by AI.
         </h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
           {steps.map((s) => (
             <div key={s.n} className="surface rounded-xl p-7">
               <span className="font-mono-tight text-4xl font-bold text-accent-2">

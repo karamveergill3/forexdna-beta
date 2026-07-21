@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink">
       <div className="mx-auto max-w-[1440px] px-6 pt-16 md:px-10">
-        <div className="grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-12 sm:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <Link href="/" className="text-lg font-black tracking-tight">
               Forex<span className="text-accent-2">DNA</span>

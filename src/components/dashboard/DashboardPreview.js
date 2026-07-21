@@ -45,7 +45,7 @@ export default function DashboardPreview() {
       </div>
 
       {/* Chart + account overview */}
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
         <div className="surface rounded-xl p-6">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-semibold">Balance history</span>
@@ -72,7 +72,7 @@ export default function DashboardPreview() {
       </div>
 
       {/* Trading journal + calendar */}
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
         <div className="surface rounded-xl p-6">
           <div className="mb-4 text-sm font-semibold">Closed trades</div>
           <div className="overflow-x-auto">
@@ -138,7 +138,7 @@ export default function DashboardPreview() {
       </div>
 
       {/* Risk stack + discipline */}
-      <div className="mt-6 grid gap-6 lg:grid-cols-[280px_1fr]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
         <div className="surface flex flex-col items-center rounded-xl p-6">
           <div className="mb-2 self-start text-sm font-semibold">Discipline score</div>
           <DisciplineGauge score={disciplineScore} />

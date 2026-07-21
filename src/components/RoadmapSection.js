@@ -36,7 +36,7 @@ export default function RoadmapSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
           {items.map((item) => (
             <div
               key={item.n}

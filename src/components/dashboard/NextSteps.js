@@ -20,7 +20,7 @@ export default function NextSteps() {
   return (
     <div className="surface rounded-xl p-6">
       <div className="mb-5 text-sm font-semibold">What&rsquo;s next</div>
-      <div className="grid gap-6 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {items.map((item) => (
           <div key={item.n}>
             <span className="font-mono-tight text-2xl font-bold text-accent-2">

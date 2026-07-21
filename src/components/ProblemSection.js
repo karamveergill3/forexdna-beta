@@ -23,7 +23,7 @@ export default function ProblemSection() {
         <h2 className="mt-4 max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
           Retail has limited access to algorithmic trading.
         </h2>
-        <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-3">
           {problems.map((p) => (
             <div key={p.label}>
               <div className="eyebrow mb-5 text-[12px] text-accent-2">
