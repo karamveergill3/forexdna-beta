@@ -1,26 +1,26 @@
 // Purely decorative — stylized candles, not real market data.
 const candles = [
-  { o: 60, h: 68, l: 55, c: 58 },
-  { o: 58, h: 62, l: 50, c: 52 },
-  { o: 52, h: 56, l: 44, c: 46 },
-  { o: 46, h: 54, l: 43, c: 51 },
-  { o: 51, h: 60, l: 49, c: 57 },
-  { o: 57, h: 58, l: 47, c: 49 },
-  { o: 49, h: 51, l: 40, c: 42 },
-  { o: 42, h: 50, l: 39, c: 47 },
-  { o: 47, h: 55, l: 45, c: 53 },
-  { o: 53, h: 61, l: 51, c: 59 },
-  { o: 59, h: 60, l: 49, c: 51 },
-  { o: 51, h: 58, l: 48, c: 55 },
-  { o: 55, h: 64, l: 53, c: 62 },
-  { o: 62, h: 70, l: 60, c: 68 },
+  { o: 40, h: 48, l: 35, c: 46 },
+  { o: 46, h: 57, l: 44, c: 55 },
+  { o: 55, h: 59, l: 46, c: 49 },
+  { o: 49, h: 61, l: 47, c: 59 },
+  { o: 59, h: 69, l: 57, c: 67 },
+  { o: 67, h: 69, l: 58, c: 61 },
+  { o: 61, h: 73, l: 60, c: 71 },
+  { o: 71, h: 75, l: 64, c: 68 },
+  { o: 68, h: 81, l: 67, c: 79 },
+  { o: 79, h: 84, l: 71, c: 73 },
+  { o: 73, h: 89, l: 72, c: 87 },
+  { o: 87, h: 95, l: 85, c: 93 },
+  { o: 93, h: 94, l: 82, c: 86 },
+  { o: 86, h: 100, l: 85, c: 98 },
 ];
 
 const COLS = candles.length;
 const COL_W = 26;
-const BODY_W = 14;
+const BODY_W = 15;
 const CHART_W = COLS * COL_W;
-const CHART_H = 80;
+const CHART_H = 100;
 
 // Values run low->high in "price" terms; invert for SVG y (0 at top).
 function y(v) {
