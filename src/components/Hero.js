@@ -28,7 +28,7 @@ export default function Hero() {
             "linear-gradient(to right, transparent, black 30%, black 92%, transparent)",
         }}
       >
-        <div className="h-[38%] w-full scale-[5]">
+        <div className="h-[38%] w-full scale-[2.5]">
           <CandlestickArt />
         </div>
       </div>
