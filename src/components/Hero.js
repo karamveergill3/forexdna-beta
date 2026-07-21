@@ -5,7 +5,14 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-white/10">
       <div className="grid-field pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute inset-0">
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] lg:block"
+        style={{
+          maskImage: "linear-gradient(to right, transparent, black 25%, black 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 25%, black 92%, transparent)",
+        }}
+      >
         <div className="level-line absolute left-0 top-[30%] h-px w-full bg-accent-2" />
         <div
           className="level-line absolute left-0 top-[58%] h-px w-full bg-accent-2"
