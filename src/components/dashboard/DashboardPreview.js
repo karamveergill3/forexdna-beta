@@ -46,7 +46,7 @@ export default function DashboardPreview() {
 
       {/* Chart + account overview */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
-        <div className="surface relative overflow-hidden rounded-xl p-6">
+        <div className="surface relative overflow-hidden rounded-xl p-6 self-start">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-semibold">Balance history</span>
             <CountUp
@@ -60,7 +60,7 @@ export default function DashboardPreview() {
           <div className="trace-sweep pointer-events-none absolute inset-y-0 w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         </div>
 
-        <div className="surface rounded-xl p-6">
+        <div className="surface rounded-xl p-6 self-start">
           <div className="mb-4 text-sm font-semibold">Account overview</div>
           <dl className="flex flex-col gap-3 text-sm">
             <Row label="Account number" value={sampleAccount.accountNumber} />
@@ -74,7 +74,7 @@ export default function DashboardPreview() {
 
       {/* Trading journal + calendar */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
-        <div className="surface rounded-xl p-6">
+        <div className="surface rounded-xl p-6 self-start">
           <div className="mb-4 text-sm font-semibold">Closed trades</div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -117,7 +117,7 @@ export default function DashboardPreview() {
           </div>
         </div>
 
-        <div className="surface rounded-xl p-6">
+        <div className="surface rounded-xl p-6 self-start">
           <PnlCalendar month={8} year={2025} dailyPnl={dailyPnl} />
         </div>
       </div>
@@ -140,12 +140,12 @@ export default function DashboardPreview() {
 
       {/* Risk stack + discipline */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
-        <div className="surface flex flex-col items-center rounded-xl p-6">
+        <div className="surface flex flex-col items-center rounded-xl p-6 self-start">
           <div className="mb-2 self-start text-sm font-semibold">Discipline score</div>
           <DisciplineGauge score={disciplineScore} />
         </div>
 
-        <div className="surface rounded-xl p-6">
+        <div className="surface rounded-xl p-6 self-start">
           <div className="mb-5 text-sm font-semibold">Risk stack</div>
           <div className="flex flex-col gap-5">
             {riskStack.map((r) => (

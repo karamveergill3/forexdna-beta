@@ -2,6 +2,7 @@ import { Saira, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeScript from "@/components/ThemeScript";
 import Particles from "@/components/Particles";
+import { Analytics } from "@vercel/analytics/next";
 
 const saira = Saira({
   variable: "--font-saira",
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
         <div className="grain-overlay" />
         <Particles />
         {children}
+        <Analytics />
       </body>
     </html>
   );
