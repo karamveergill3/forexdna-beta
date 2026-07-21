@@ -28,7 +28,7 @@ const toneColor = {
 
 export default function DashboardPreview() {
   return (
-    <div className="mx-auto max-w-6xl px-6 pb-24 md:px-10">
+    <div className="mx-auto max-w-[1440px] px-6 pb-24 md:px-10">
       <div className="mb-8 flex items-center gap-3 rounded-lg border border-accent-2/30 bg-accent/10 px-4 py-3">
         <span className="eyebrow text-[10px] text-accent-2">Preview</span>
         <p className="text-xs text-text-dim">

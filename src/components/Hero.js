@@ -33,7 +33,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-14 md:px-10 md:pb-20 md:pt-20">
+      <div className="relative mx-auto max-w-[1440px] px-6 pb-16 pt-14 md:px-10 md:pb-20 md:pt-20">
         <div className="rise eyebrow text-[12px] text-accent-2">
           Automated forex strategy
         </div>

@@ -32,7 +32,7 @@ export default async function WelcomePage() {
   return (
     <div className="min-h-screen w-full bg-ink">
       <div className="border-b border-white/10">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-10">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-6 md:px-10">
           <Link href="/" className="text-lg font-black tracking-tight">
             Forex<span className="text-accent-2">DNA</span>
           </Link>
@@ -51,17 +51,17 @@ export default async function WelcomePage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pt-8 md:px-10">
+      <div className="mx-auto max-w-[1440px] px-6 pt-8 md:px-10">
         <h1 className="text-2xl font-extrabold tracking-tight md:text-3xl">
           <Greeting name={profile?.full_name} />
         </h1>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pt-6 md:px-10">
+      <div className="mx-auto max-w-[1440px] px-6 pt-6 md:px-10">
         <ProgressTracker />
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pt-6 md:px-10">
+      <div className="mx-auto max-w-[1440px] px-6 pt-6 md:px-10">
         <NextSteps />
       </div>
 
@@ -69,7 +69,7 @@ export default async function WelcomePage() {
         <DashboardPreview />
       </div>
 
-      <div className="mx-auto -mt-16 max-w-6xl px-6 pb-16 md:px-10">
+      <div className="mx-auto -mt-16 max-w-[1440px] px-6 pb-16 md:px-10">
         <ReferralLink userId={user.id} />
       </div>
     </div>
