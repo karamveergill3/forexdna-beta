@@ -170,7 +170,9 @@ body {
   100% { left: 105%; opacity: 0; }
 }
 .trace-sweep {
-  animation: traceSweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) 1;
+  left: -15%;
+  opacity: 0;
+  animation: traceSweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) 1 forwards;
 }
 
 @keyframes shimmer {
