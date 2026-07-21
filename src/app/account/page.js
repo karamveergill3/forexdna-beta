@@ -36,7 +36,7 @@ export default async function AccountPage() {
     : null;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full bg-ink">
       <div className="border-b border-white/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-10">
           <Link href="/" className="text-lg font-black tracking-tight">

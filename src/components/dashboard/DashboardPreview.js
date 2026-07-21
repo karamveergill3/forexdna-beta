@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import BalanceChart from "./BalanceChart";
 import DisciplineGauge from "./DisciplineGauge";
 import PnlCalendar from "./PnlCalendar";
+import CountUp from "./CountUp";
 import {
   sampleAccount,
   balanceCurve,
@@ -37,9 +39,9 @@ export default function DashboardPreview() {
 
       {/* Top row: balance / equity / unrealized */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <StatBox label="Balance" value={fmt(sampleAccount.balance)} tone="high" />
-        <StatBox label="Equity" value={fmt(sampleAccount.equity)} tone="high" />
-        <StatBox label="Unrealized P&L" value={fmt(sampleAccount.unrealizedPnl)} />
+        <StatBox label="Balance" countValue={sampleAccount.balance} countFormat={fmt} tone="high" />
+        <StatBox label="Equity" countValue={sampleAccount.equity} countFormat={fmt} tone="high" />
+        <StatBox label="Unrealized P&L" countValue={sampleAccount.unrealizedPnl} countFormat={fmt} />
       </div>
 
       {/* Chart + account overview */}
@@ -47,12 +49,12 @@ export default function DashboardPreview() {
         <div className="surface rounded-xl p-6">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-semibold">Balance history</span>
-            <span
+            <CountUp
+              value={((sampleAccount.balance - sampleAccount.startingBalance) / sampleAccount.startingBalance) * 100}
+              format={(n) => `+${n.toFixed(1)}%`}
               className="font-mono-tight text-sm font-semibold"
               style={{ color: "var(--color-high)" }}
-            >
-              +{(((sampleAccount.balance - sampleAccount.startingBalance) / sampleAccount.startingBalance) * 100).toFixed(1)}%
-            </span>
+            />
           </div>
           <BalanceChart data={balanceCurve} startingBalance={sampleAccount.startingBalance} />
         </div>
@@ -123,15 +125,15 @@ export default function DashboardPreview() {
       <div className="mt-6 surface rounded-xl p-6">
         <div className="mb-4 text-sm font-semibold">Statistics</div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          <StatBox small label="Win rate" value={`${statistics.winRate}%`} tone="high" />
-          <StatBox small label="Avg profit" value={fmt(statistics.avgProfit)} tone="high" />
-          <StatBox small label="Avg loss" value={fmt(statistics.avgLoss)} tone="mid" />
-          <StatBox small label="Trades" value={statistics.numberOfTrades} />
-          <StatBox small label="Lots" value={statistics.lots} />
-          <StatBox small label="Sharpe ratio" value={statistics.sharpe} tone="high" />
-          <StatBox small label="Avg RRR" value={statistics.avgRRR} tone="high" />
-          <StatBox small label="Expectancy" value={fmt(statistics.expectancy)} tone="high" />
-          <StatBox small label="Profit factor" value={statistics.profitFactor} tone="high" />
+          <StatBox small label="Win rate" countValue={statistics.winRate} countFormat={(n) => `${n.toFixed(1)}%`} tone="high" />
+          <StatBox small label="Avg profit" countValue={statistics.avgProfit} countFormat={fmt} tone="high" />
+          <StatBox small label="Avg loss" countValue={statistics.avgLoss} countFormat={fmt} tone="mid" />
+          <StatBox small label="Trades" countValue={statistics.numberOfTrades} countFormat={(n) => Math.round(n)} />
+          <StatBox small label="Lots" countValue={statistics.lots} countFormat={(n) => n.toFixed(2)} />
+          <StatBox small label="Sharpe ratio" countValue={statistics.sharpe} countFormat={(n) => n.toFixed(2)} tone="high" />
+          <StatBox small label="Avg RRR" countValue={statistics.avgRRR} countFormat={(n) => n.toFixed(2)} tone="high" />
+          <StatBox small label="Expectancy" countValue={statistics.expectancy} countFormat={fmt} tone="high" />
+          <StatBox small label="Profit factor" countValue={statistics.profitFactor} countFormat={(n) => n.toFixed(2)} tone="high" />
         </div>
       </div>
 
@@ -157,10 +159,7 @@ export default function DashboardPreview() {
                   </span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-ink">
-                  <div
-                    className="h-full rounded-full"
-                    style={{ width: `${r.pct}%`, background: toneColor[r.tone] }}
-                  />
+                  <RiskBar pct={r.pct} color={toneColor[r.tone]} />
                 </div>
               </div>
             ))}
@@ -171,18 +170,54 @@ export default function DashboardPreview() {
   );
 }
 
-function StatBox({ label, value, small, tone }) {
+function StatBox({ label, value, countValue, countFormat, small, tone }) {
   const color = tone ? toneColor[tone] : "var(--color-text)";
+  const sizeClass = `mt-1.5 font-mono-tight font-bold ${small ? "text-base" : "text-xl"}`;
   return (
     <div className={`surface rounded-lg ${small ? "p-3" : "p-4"}`}>
       <div className="eyebrow text-[10px] text-text-faint">{label}</div>
-      <div
-        className={`mt-1.5 font-mono-tight font-bold ${small ? "text-base" : "text-xl"}`}
-        style={{ color }}
-      >
-        {value}
-      </div>
+      {countValue !== undefined ? (
+        <CountUp
+          value={countValue}
+          format={countFormat}
+          className={sizeClass}
+          style={{ color }}
+        />
+      ) : (
+        <div className={sizeClass} style={{ color }}>
+          {value}
+        </div>
+      )}
     </div>
+  );
+}
+
+function RiskBar({ pct, color }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="h-full rounded-full transition-[width] duration-1000 ease-out"
+      style={{ width: visible ? `${pct}%` : "0%", background: color }}
+    />
   );
 }
 

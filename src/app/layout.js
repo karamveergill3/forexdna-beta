@@ -14,6 +14,10 @@ const jbMono = JetBrains_Mono({
   weight: ["400", "500", "700"],
 });
 
+export const viewport = {
+  themeColor: "#060709",
+};
+
 export const metadata = {
   metadataBase: new URL("https://forexdna.co.uk"),
   title: "ForexDNA — Automated Forex Strategy",
@@ -42,6 +46,7 @@ export default function RootLayout({ children }) {
         <ThemeScript />
       </head>
       <body className="min-h-full flex flex-col antialiased bg-ink text-text">
+        <div className="grain-overlay" />
         {children}
       </body>
     </html>
