@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import TiltCard from "./TiltCard";
 
 const items = [
   {
@@ -38,10 +39,7 @@ export default function RoadmapSection() {
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
           {items.map((item) => (
-            <div
-              key={item.n}
-              className="surface flex flex-col rounded-xl p-7"
-            >
+            <TiltCard key={item.n} className="surface flex flex-col rounded-xl p-7">
               <span className="font-mono-tight text-4xl font-bold text-accent-2">
                 {item.n}
               </span>
@@ -52,7 +50,7 @@ export default function RoadmapSection() {
               <span className="eyebrow mt-5 text-[10px] text-text-faint">
                 Coming soon
               </span>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </Reveal>

@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import TiltCard from "./TiltCard";
 
 const steps = [
   {
@@ -30,7 +31,7 @@ export default function TrustSection() {
         </h2>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
           {steps.map((s) => (
-            <div key={s.n} className="surface rounded-xl p-7">
+            <TiltCard key={s.n} className="surface rounded-xl p-7">
               <span className="font-mono-tight text-4xl font-bold text-accent-2">
                 {s.n}
               </span>
@@ -38,7 +39,7 @@ export default function TrustSection() {
               <p className="mt-3 text-base leading-relaxed text-text-dim">
                 {s.text}
               </p>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </Reveal>

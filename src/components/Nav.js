@@ -8,7 +8,7 @@ export default async function Nav() {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/75 backdrop-blur-md">
+    <header className="glass-nav sticky top-0 z-50 border-b border-white/10 bg-ink/70">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-4 md:px-10">
         <Link href="/" className="text-xl font-black tracking-tight">
           Forex<span className="text-accent-2">DNA</span>

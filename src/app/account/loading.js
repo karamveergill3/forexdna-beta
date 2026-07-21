@@ -1,5 +1,5 @@
-import PageLoading from "@/components/PageLoading";
+import AccountSkeleton from "@/components/AccountSkeleton";
 
 export default function Loading() {
-  return <PageLoading />;
+  return <AccountSkeleton />;
 }

@@ -46,7 +46,7 @@ export default function DashboardPreview() {
 
       {/* Chart + account overview */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
-        <div className="surface rounded-xl p-6">
+        <div className="surface relative overflow-hidden rounded-xl p-6">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-semibold">Balance history</span>
             <CountUp
@@ -57,6 +57,7 @@ export default function DashboardPreview() {
             />
           </div>
           <BalanceChart data={balanceCurve} startingBalance={sampleAccount.startingBalance} />
+          <div className="trace-sweep pointer-events-none absolute inset-y-0 w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         </div>
 
         <div className="surface rounded-xl p-6">

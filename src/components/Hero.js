@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CandlestickArt from "./CandlestickArt";
+import ScrambleText from "./ScrambleText";
 
 export default function Hero() {
   return (
@@ -47,7 +48,8 @@ export default function Hero() {
         </div>
 
         <h1 className="rise mt-4 text-5xl font-black leading-[0.92] tracking-tighter sm:text-6xl md:text-8xl lg:text-[9rem]">
-          Forex<span className="text-accent-2">DNA</span>
+          <ScrambleText text="Forex" delay={300} duration={700} />
+          <ScrambleText text="DNA" className="text-accent-2" delay={420} duration={700} />
         </h1>
 
         <p

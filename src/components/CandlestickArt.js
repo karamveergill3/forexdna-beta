@@ -146,7 +146,7 @@ export default function CandlestickArt() {
         strokeLinecap="round"
         strokeLinejoin="round"
         className="ma-line"
-        style={{ strokeDasharray: maLength, strokeDashoffset: maLength }}
+        style={{ strokeDasharray: maLength, "--ma-length": maLength }}
       />
 
       {SIGNAL_INDICES.map((idx) => {
