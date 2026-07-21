@@ -56,7 +56,7 @@ export default function Hero() {
           style={{ fontSize: "clamp(2.75rem, 0.6rem + 9.4vw, 9rem)" }}
         >
           <ScrambleText text="Forex" startDelay={350} />
-          <ScrambleText text="DNA" className="text-gradient-blue-green" startDelay={350 + 5 * 85} />
+          <ScrambleText text="DNA" className="text-gradient-blue-green pr-[0.06em]" startDelay={350 + 5 * 85} />
         </h1>
 
         <p
