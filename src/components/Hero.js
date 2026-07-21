@@ -51,7 +51,10 @@ export default function Hero() {
           Automated forex strategy
         </div>
 
-        <h1 className="rise mt-4 text-5xl font-black leading-none tracking-tighter sm:text-6xl md:text-8xl lg:text-[9rem]">
+        <h1
+          className="rise mt-4 font-black leading-none tracking-tighter"
+          style={{ fontSize: "clamp(2.75rem, 0.6rem + 9.4vw, 9rem)" }}
+        >
           <ScrambleText text="Forex" startDelay={350} />
           <ScrambleText text="DNA" className="text-gradient-blue-green" startDelay={350 + 5 * 85} />
         </h1>
