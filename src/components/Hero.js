@@ -66,9 +66,10 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Stats — 3 equal columns on mobile, no wrapping */}
+        {/* Stats — 3 equal columns on mobile, capped width on desktop so it
+            doesn't run into the candlestick art on the right */}
         <div
-          className="rise mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-8"
+          className="rise mt-10 grid max-w-3xl grid-cols-3 gap-4 border-t border-white/10 pt-8"
           style={{ animationDelay: "0.24s" }}
         >
           <Stat label="Strategy" value="Mean reversion" />
