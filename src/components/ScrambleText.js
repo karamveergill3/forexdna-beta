@@ -2,38 +2,80 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ01#$%";
+// Letters only — keeps it reading as "decoding text," not a glitch/noise effect.
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-export default function ScrambleText({ text, className = "", delay = 0, duration = 800 }) {
+export default function ScrambleText({
+  text,
+  className = "",
+  startDelay = 0,
+  staggerPerChar = 85, // ms between each character's turn — creates the cascade
+  settleDuration = 520, // how long each character spends unsettled before locking
+  shuffleEvery = 65, // ms between glyph swaps — slower reads as more deliberate
+}) {
   const [display, setDisplay] = useState(text);
+  const [settled, setSettled] = useState(true);
   const frameRef = useRef(null);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const start = performance.now();
+    const startTime = performance.now() + startDelay;
+    const lastShuffle = new Array(text.length).fill(0);
+    const current = text.split("");
 
-      function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const revealCount = Math.floor(progress * text.length);
-        let out = "";
-        for (let i = 0; i < text.length; i++) {
-          out += i < revealCount ? text[i] : CHARS[Math.floor(Math.random() * CHARS.length)];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSettled(false);
+
+    function tick(now) {
+      if (now < startTime) {
+        frameRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      const elapsed = now - startTime;
+      let allLocked = true;
+
+      for (let i = 0; i < text.length; i++) {
+        if (text[i] === " ") {
+          current[i] = " ";
+          continue;
         }
-        setDisplay(out);
-        if (progress < 1) {
-          frameRef.current = requestAnimationFrame(tick);
-        } else {
-          setDisplay(text);
+        const lockTime = i * staggerPerChar + settleDuration;
+        if (elapsed >= lockTime) {
+          current[i] = text[i];
+          continue;
+        }
+        allLocked = false;
+        if (now - lastShuffle[i] > shuffleEvery) {
+          current[i] = CHARS[Math.floor(Math.random() * CHARS.length)];
+          lastShuffle[i] = now;
         }
       }
-      frameRef.current = requestAnimationFrame(tick);
-    }, delay);
+
+      setDisplay(current.join(""));
+      if (!allLocked) {
+        frameRef.current = requestAnimationFrame(tick);
+      } else {
+        setDisplay(text);
+        setSettled(true);
+      }
+    }
+    frameRef.current = requestAnimationFrame(tick);
 
     return () => {
-      clearTimeout(timeout);
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
     };
-  }, [text, delay, duration]);
+  }, [text, startDelay, staggerPerChar, settleDuration, shuffleEvery]);
 
-  return <span className={className}>{display}</span>;
+  return (
+    <span
+      className={className}
+      style={{
+        display: "inline-block",
+        filter: settled ? "blur(0px)" : "blur(2.5px)",
+        opacity: settled ? 1 : 0.75,
+        transition: "filter 0.5s ease-out, opacity 0.5s ease-out",
+      }}
+    >
+      {display}
+    </span>
+  );
 }

@@ -48,8 +48,8 @@ export default function Hero() {
         </div>
 
         <h1 className="rise mt-4 text-5xl font-black leading-[0.92] tracking-tighter sm:text-6xl md:text-8xl lg:text-[9rem]">
-          <ScrambleText text="Forex" delay={300} duration={700} />
-          <ScrambleText text="DNA" className="text-accent-2" delay={420} duration={700} />
+          <ScrambleText text="Forex" startDelay={350} />
+          <ScrambleText text="DNA" className="text-accent-2" startDelay={350 + 5 * 85} />
         </h1>
 
         <p
