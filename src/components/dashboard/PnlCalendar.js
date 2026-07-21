@@ -1,5 +1,10 @@
 const DAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
+function fmt(n) {
+  const sign = n < 0 ? "-" : "+";
+  return `${sign}$${Math.abs(n).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+}
+
 export default function PnlCalendar({ month, year, dailyPnl }) {
   const firstOfMonth = new Date(year, month, 1);
   // Convert JS Sunday=0 to Monday-first index
@@ -12,6 +17,16 @@ export default function PnlCalendar({ month, year, dailyPnl }) {
   while (cells.length % 7 !== 0) cells.push(null);
 
   const monthLabel = firstOfMonth.toLocaleString("en-US", { month: "long", year: "numeric" });
+
+  // Monthly summary, computed from the same daily data driving the grid.
+  const entries = Object.values(dailyPnl).filter((e) => e.trades > 0);
+  const totalPnl = entries.reduce((sum, e) => sum + e.pnl, 0);
+  const bestDay = entries.reduce((best, e) => (e.pnl > (best?.pnl ?? -Infinity) ? e : best), null);
+  const tradingDays = entries.length;
+
+  // Heatmap intensity — scale color strength by how big that day's P&L was
+  // relative to the month's biggest move, so standout days actually stand out.
+  const maxAbsPnl = Math.max(1, ...entries.map((e) => Math.abs(e.pnl)));
 
   return (
     <div>
@@ -29,12 +44,22 @@ export default function PnlCalendar({ month, year, dailyPnl }) {
           const entry = day ? dailyPnl[day] : null;
           const positive = entry && entry.pnl > 0;
           const negative = entry && entry.pnl < 0;
+          const intensity = entry
+            ? Math.min(1, Math.max(0.18, Math.abs(entry.pnl) / maxAbsPnl))
+            : 0;
+          const bgColor = positive
+            ? `rgba(29, 158, 117, ${(intensity * 0.32).toFixed(2)})`
+            : negative
+            ? `rgba(226, 75, 74, ${(intensity * 0.32).toFixed(2)})`
+            : undefined;
+
           return (
             <div
               key={i}
               className={`aspect-square rounded-md border p-1.5 text-[10px] ${
                 day ? "border-white/10" : "border-transparent"
-              } ${positive ? "bg-high/10" : negative ? "bg-mid/10" : "bg-ink"}`}
+              } ${!entry ? "bg-ink" : ""}`}
+              style={bgColor ? { backgroundColor: bgColor } : undefined}
             >
               {day && (
                 <>
@@ -53,6 +78,32 @@ export default function PnlCalendar({ month, year, dailyPnl }) {
             </div>
           );
         })}
+      </div>
+
+      <div className="mt-6 grid grid-cols-3 gap-3 border-t border-white/10 pt-5">
+        <SummaryStat
+          label="Month total"
+          value={fmt(totalPnl)}
+          tone={totalPnl >= 0 ? "high" : "mid"}
+        />
+        <SummaryStat
+          label="Best day"
+          value={bestDay ? fmt(bestDay.pnl) : "—"}
+          tone="high"
+        />
+        <SummaryStat label="Trading days" value={tradingDays} />
+      </div>
+    </div>
+  );
+}
+
+function SummaryStat({ label, value, tone }) {
+  const color = tone === "high" ? "var(--color-high)" : tone === "mid" ? "var(--color-mid)" : "var(--color-text)";
+  return (
+    <div>
+      <div className="eyebrow text-[9px] text-text-faint">{label}</div>
+      <div className="mt-1 font-mono-tight text-sm font-semibold" style={{ color }}>
+        {value}
       </div>
     </div>
   );

@@ -81,3 +81,29 @@ export const riskStack = [
 ];
 
 export const disciplineScore = 88;
+
+// Deterministic (no Math.random — stays identical between server & client)
+// synthetic trend ending exactly at the real stat value, purely for the
+// sparkline visuals in the Statistics grid.
+function sparkTrend(final, amplitude, phase = 0, points = 8) {
+  const arr = [];
+  for (let i = 0; i < points; i++) {
+    const t = i / (points - 1);
+    const wiggle = Math.sin(t * Math.PI * 2.4 + phase) * amplitude * (1 - t * 0.7);
+    arr.push(final - amplitude * 0.35 + wiggle + t * amplitude * 0.35);
+  }
+  arr[points - 1] = final;
+  return arr;
+}
+
+export const statTrends = {
+  winRate: sparkTrend(statistics.winRate, 9, 0.4),
+  avgProfit: sparkTrend(statistics.avgProfit, 90, 1.1),
+  avgLoss: sparkTrend(statistics.avgLoss, 40, 2.0),
+  numberOfTrades: sparkTrend(statistics.numberOfTrades, 3, 0.8),
+  lots: sparkTrend(statistics.lots, 1.2, 1.6),
+  sharpe: sparkTrend(statistics.sharpe, 0.5, 0.2),
+  avgRRR: sparkTrend(statistics.avgRRR, 0.4, 2.4),
+  expectancy: sparkTrend(statistics.expectancy, 60, 0.6),
+  profitFactor: sparkTrend(statistics.profitFactor, 0.6, 1.4),
+};

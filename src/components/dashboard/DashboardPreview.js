@@ -5,12 +5,15 @@ import BalanceChart from "./BalanceChart";
 import DisciplineGauge from "./DisciplineGauge";
 import PnlCalendar from "./PnlCalendar";
 import CountUp from "./CountUp";
+import Sparkline from "./Sparkline";
+import TiltCard from "@/components/TiltCard";
 import {
   sampleAccount,
   balanceCurve,
   closedTrades,
   dailyPnl,
   statistics,
+  statTrends,
   riskStack,
   disciplineScore,
 } from "./sampleData";
@@ -46,7 +49,7 @@ export default function DashboardPreview() {
 
       {/* Chart + account overview */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
-        <div className="surface relative overflow-hidden rounded-xl p-6 self-start">
+        <div className="glass-card relative overflow-hidden rounded-xl p-6 self-start">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-semibold">Balance history</span>
             <CountUp
@@ -60,7 +63,7 @@ export default function DashboardPreview() {
           <div className="trace-sweep pointer-events-none absolute inset-y-0 w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         </div>
 
-        <div className="surface rounded-xl p-6 self-start">
+        <div className="glass-card rounded-xl p-6 self-start">
           <div className="mb-4 text-sm font-semibold">Account overview</div>
           <dl className="flex flex-col gap-3 text-sm">
             <Row label="Account number" value={sampleAccount.accountNumber} />
@@ -74,7 +77,7 @@ export default function DashboardPreview() {
 
       {/* Trading journal + calendar */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
-        <div className="surface rounded-xl p-6 self-start">
+        <div className="glass-card rounded-xl p-6 self-start">
           <div className="mb-4 text-sm font-semibold">Closed trades</div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -88,8 +91,12 @@ export default function DashboardPreview() {
                 </tr>
               </thead>
               <tbody>
-                {closedTrades.map((t) => (
-                  <tr key={t.id} className="border-t border-white/8">
+                {closedTrades.map((t, i) => (
+                  <tr
+                    key={t.id}
+                    className="rise border-t border-white/8"
+                    style={{ animationDelay: `${i * 55}ms` }}
+                  >
                     <td className="py-3 pr-4">
                       <span
                         className="rounded-full px-2 py-0.5 font-mono-tight text-[11px] font-semibold"
@@ -117,35 +124,35 @@ export default function DashboardPreview() {
           </div>
         </div>
 
-        <div className="surface rounded-xl p-6 self-start">
+        <div className="glass-card rounded-xl p-6 self-start">
           <PnlCalendar month={8} year={2025} dailyPnl={dailyPnl} />
         </div>
       </div>
 
       {/* Statistics */}
-      <div className="mt-6 surface rounded-xl p-6">
+      <div className="mt-6 glass-card rounded-xl p-6">
         <div className="mb-4 text-sm font-semibold">Statistics</div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          <StatBox small label="Win rate" countValue={statistics.winRate} countFormat={(n) => `${n.toFixed(1)}%`} tone="high" />
-          <StatBox small label="Avg profit" countValue={statistics.avgProfit} countFormat={fmt} tone="high" />
-          <StatBox small label="Avg loss" countValue={statistics.avgLoss} countFormat={fmt} tone="mid" />
-          <StatBox small label="Trades" countValue={statistics.numberOfTrades} countFormat={(n) => Math.round(n)} />
-          <StatBox small label="Lots" countValue={statistics.lots} countFormat={(n) => n.toFixed(2)} />
-          <StatBox small label="Sharpe ratio" countValue={statistics.sharpe} countFormat={(n) => n.toFixed(2)} tone="high" />
-          <StatBox small label="Avg RRR" countValue={statistics.avgRRR} countFormat={(n) => n.toFixed(2)} tone="high" />
-          <StatBox small label="Expectancy" countValue={statistics.expectancy} countFormat={fmt} tone="high" />
-          <StatBox small label="Profit factor" countValue={statistics.profitFactor} countFormat={(n) => n.toFixed(2)} tone="high" />
+          <StatBox small label="Win rate" countValue={statistics.winRate} countFormat={(n) => `${n.toFixed(1)}%`} tone="high" trend={statTrends.winRate} />
+          <StatBox small label="Avg profit" countValue={statistics.avgProfit} countFormat={fmt} tone="high" trend={statTrends.avgProfit} />
+          <StatBox small label="Avg loss" countValue={statistics.avgLoss} countFormat={fmt} tone="mid" trend={statTrends.avgLoss} />
+          <StatBox small label="Trades" countValue={statistics.numberOfTrades} countFormat={(n) => Math.round(n)} trend={statTrends.numberOfTrades} />
+          <StatBox small label="Lots" countValue={statistics.lots} countFormat={(n) => n.toFixed(2)} trend={statTrends.lots} />
+          <StatBox small label="Sharpe ratio" countValue={statistics.sharpe} countFormat={(n) => n.toFixed(2)} tone="high" trend={statTrends.sharpe} />
+          <StatBox small label="Avg RRR" countValue={statistics.avgRRR} countFormat={(n) => n.toFixed(2)} tone="high" trend={statTrends.avgRRR} />
+          <StatBox small label="Expectancy" countValue={statistics.expectancy} countFormat={fmt} tone="high" trend={statTrends.expectancy} />
+          <StatBox small label="Profit factor" countValue={statistics.profitFactor} countFormat={(n) => n.toFixed(2)} tone="high" trend={statTrends.profitFactor} />
         </div>
       </div>
 
       {/* Risk stack + discipline */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
-        <div className="surface flex flex-col items-center rounded-xl p-6 self-start">
+        <div className="glass-card flex flex-col items-center rounded-xl p-6 self-start">
           <div className="mb-2 self-start text-sm font-semibold">Discipline score</div>
           <DisciplineGauge score={disciplineScore} />
         </div>
 
-        <div className="surface rounded-xl p-6 self-start">
+        <div className="glass-card rounded-xl p-6 self-start">
           <div className="mb-5 text-sm font-semibold">Risk stack</div>
           <div className="flex flex-col gap-5">
             {riskStack.map((r) => (
@@ -171,25 +178,30 @@ export default function DashboardPreview() {
   );
 }
 
-function StatBox({ label, value, countValue, countFormat, small, tone }) {
+function StatBox({ label, value, countValue, countFormat, small, tone, trend }) {
   const color = tone ? toneColor[tone] : "var(--color-text)";
   const sizeClass = `mt-1.5 font-mono-tight font-bold ${small ? "text-base" : "text-xl"}`;
   return (
-    <div className={`surface rounded-lg ${small ? "p-3" : "p-4"}`}>
-      <div className="eyebrow text-[10px] text-text-faint">{label}</div>
-      {countValue !== undefined ? (
-        <CountUp
-          value={countValue}
-          format={countFormat}
-          className={sizeClass}
-          style={{ color }}
-        />
-      ) : (
-        <div className={sizeClass} style={{ color }}>
-          {value}
+    <TiltCard className={`glass-card rounded-lg ${small ? "p-3" : "p-4"}`}>
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <div className="eyebrow text-[10px] text-text-faint">{label}</div>
+          {countValue !== undefined ? (
+            <CountUp
+              value={countValue}
+              format={countFormat}
+              className={sizeClass}
+              style={{ color }}
+            />
+          ) : (
+            <div className={sizeClass} style={{ color }}>
+              {value}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+        {trend && <Sparkline data={trend} color={color} />}
+      </div>
+    </TiltCard>
   );
 }
 
