@@ -1,10 +1,12 @@
 import Link from "next/link";
 import CandlestickArt from "./CandlestickArt";
 import ScrambleText from "./ScrambleText";
+import MeshBackground from "./MeshBackground";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-white/10">
+      <MeshBackground />
       <div className="grid-field pointer-events-none absolute inset-0" />
       <div
         className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] lg:block"
@@ -49,7 +51,7 @@ export default function Hero() {
 
         <h1 className="rise mt-4 text-5xl font-black leading-[0.92] tracking-tighter sm:text-6xl md:text-8xl lg:text-[9rem]">
           <ScrambleText text="Forex" startDelay={350} />
-          <ScrambleText text="DNA" className="text-accent-2" startDelay={350 + 5 * 85} />
+          <ScrambleText text="DNA" className="text-gradient-blue-green" startDelay={350 + 5 * 85} />
         </h1>
 
         <p

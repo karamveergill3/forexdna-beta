@@ -240,6 +240,72 @@ body {
   animation: signalPing 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* Animated mesh blob background — slow-drifting soft color blobs, used
+   behind hero/section content for a warmer, less monochrome feel. */
+@keyframes blobDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, -6%) scale(1.08); }
+  66% { transform: translate(-3%, 4%) scale(0.95); }
+}
+@keyframes blobDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-5%, 5%) scale(0.92); }
+  66% { transform: translate(4%, -3%) scale(1.06); }
+}
+@keyframes blobDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-4%, -4%) scale(1.1); }
+}
+.mesh-blob {
+  position: absolute;
+  width: 42vw;
+  height: 42vw;
+  max-width: 560px;
+  max-height: 560px;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.2;
+  mix-blend-mode: screen;
+}
+.mesh-blob-1 { animation: blobDrift1 24s ease-in-out infinite; }
+.mesh-blob-2 { animation: blobDrift2 28s ease-in-out infinite; }
+.mesh-blob-3 { animation: blobDrift3 32s ease-in-out infinite; }
+:root[data-theme="light"] .mesh-blob {
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+}
+
+/* Small blurred glow sat behind section headings for color variety. */
+.heading-glow {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.28;
+  z-index: -1;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+:root[data-theme="light"] .heading-glow {
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+}
+
+/* Gradient text for key phrases */
+.text-gradient-blue-green {
+  background: linear-gradient(90deg, var(--color-accent-2), var(--color-high));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-blue {
+  background: linear-gradient(90deg, var(--color-accent-2), #a9c8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grid-field, .level-line, .sweep-line, .rise, html {
     animation: none !important;
@@ -247,6 +313,9 @@ body {
   }
   .particle-dot, .signal-ping {
     display: none !important;
+  }
+  .mesh-blob-1, .mesh-blob-2, .mesh-blob-3 {
+    animation: none !important;
   }
   .skeleton {
     animation: none !important;
