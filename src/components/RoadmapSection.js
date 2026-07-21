@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const items = [
   {
     n: "01",
@@ -19,7 +21,7 @@ const items = [
 export default function RoadmapSection() {
   return (
     <section className="border-b border-white/10 bg-panel/40">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
+      <Reveal className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <span className="eyebrow text-[11px] text-accent-2">
@@ -53,7 +55,7 @@ export default function RoadmapSection() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

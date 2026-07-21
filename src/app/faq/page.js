@@ -11,14 +11,11 @@ const CONTACT_ANSWER =
 
 const faqs = [
   { q: "What is ForexDNA?", a: CONTACT_ANSWER },
-  { q: "How does the strategy work?", a: CONTACT_ANSWER },
-  { q: "Is my money safe?", a: CONTACT_ANSWER },
   { q: "What returns can I expect?", a: CONTACT_ANSWER },
   { q: "When does live trading start for my account?", a: CONTACT_ANSWER },
   { q: "What broker do I need to use?", a: CONTACT_ANSWER },
   { q: "How is risk managed?", a: CONTACT_ANSWER },
   { q: "Can I withdraw my funds at any time?", a: CONTACT_ANSWER },
-  { q: "Is ForexDNA regulated?", a: CONTACT_ANSWER },
   { q: "How do I get started?", a: CONTACT_ANSWER },
 ];
 

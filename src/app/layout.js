@@ -15,9 +15,24 @@ const jbMono = JetBrains_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://forexdna.co.uk"),
   title: "ForexDNA — Automated Forex Strategy",
   description:
     "An automated mean-reversion strategy on curated FX pairs, wrapped in a risk layer. Request access to ForexDNA.",
+  openGraph: {
+    title: "ForexDNA — Automated Forex Strategy",
+    description:
+      "Retail access to algorithmic trading on curated FX pairs. Request access to ForexDNA.",
+    url: "https://forexdna.co.uk",
+    siteName: "ForexDNA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ForexDNA — Automated Forex Strategy",
+    description:
+      "Retail access to algorithmic trading on curated FX pairs. Request access to ForexDNA.",
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Spinner from "./Spinner";
 
 const inputClass =
   "w-full rounded-lg border border-white/10 bg-ink px-4 py-3.5 text-sm text-text placeholder:text-text-faint outline-none transition focus:border-accent-2/60 focus:ring-1 focus:ring-accent-2/60";
@@ -107,8 +108,9 @@ export default function SignUpForm() {
         <button
           type="submit"
           disabled={status === "verifying" || code.length !== 8}
-          className="btn-primary mt-1 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
+          className="btn-primary mt-1 flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
         >
+          {status === "verifying" && <Spinner />}
           {status === "verifying" ? "Verifying…" : "Verify and continue"}
         </button>
 
@@ -178,8 +180,9 @@ export default function SignUpForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="btn-primary mt-3 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
+        className="btn-primary mt-3 flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
       >
+        {status === "loading" && <Spinner />}
         {status === "loading" ? "Creating account…" : "Request access"}
       </button>
     </form>

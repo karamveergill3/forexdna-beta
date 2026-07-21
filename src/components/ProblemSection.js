@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const problems = [
   {
     label: "Wrong tools",
@@ -16,7 +18,7 @@ const problems = [
 export default function ProblemSection() {
   return (
     <section className="border-b border-white/10 bg-ink">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
+      <Reveal className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
         <span className="eyebrow text-[11px] text-accent-2">The problem</span>
         <h2 className="mt-4 max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
           Retail has limited access to algorithmic trading.
@@ -33,7 +35,7 @@ export default function ProblemSection() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

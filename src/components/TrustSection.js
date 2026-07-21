@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const steps = [
   {
     n: "01",
@@ -19,7 +21,7 @@ const steps = [
 export default function TrustSection() {
   return (
     <section className="border-b border-white/10 bg-ink">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
+      <Reveal className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
         <span className="eyebrow text-[11px] text-accent-2">
           Development process
         </span>
@@ -39,7 +41,7 @@ export default function TrustSection() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

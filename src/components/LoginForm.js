@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Spinner from "./Spinner";
 
 const inputClass =
   "w-full rounded-lg border border-white/10 bg-ink px-4 py-3.5 text-sm text-text placeholder:text-text-faint outline-none transition focus:border-accent-2/60 focus:ring-1 focus:ring-accent-2/60";
@@ -73,8 +74,9 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="btn-primary mt-3 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
+        className="btn-primary mt-3 flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
       >
+        {loading && <Spinner />}
         {loading ? "Signing in…" : "Sign in"}
       </button>
     </form>
