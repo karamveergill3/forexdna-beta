@@ -18,7 +18,7 @@ export default function ScrambleText({
   const frameRef = useRef(null);
 
   useEffect(() => {
-    const startTime = performance.now() + startDelay;
+    const mountTime = performance.now();
     const lastShuffle = new Array(text.length).fill(0);
     const current = text.split("");
 
@@ -26,11 +26,7 @@ export default function ScrambleText({
     setSettled(false);
 
     function tick(now) {
-      if (now < startTime) {
-        frameRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      const elapsed = now - startTime;
+      const elapsed = now - mountTime;
       let allLocked = true;
 
       for (let i = 0; i < text.length; i++) {
@@ -38,7 +34,7 @@ export default function ScrambleText({
           current[i] = " ";
           continue;
         }
-        const lockTime = i * staggerPerChar + settleDuration;
+        const lockTime = startDelay + i * staggerPerChar + settleDuration;
         if (elapsed >= lockTime) {
           current[i] = text[i];
           continue;
