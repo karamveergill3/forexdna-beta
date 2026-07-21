@@ -19,6 +19,7 @@ export default function Hero() {
       </div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,transparent_15%,rgba(6,7,9,0.8)_100%)]" />
 
+      {/* Candlestick art — desktop only */}
       <div
         className="rise pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] items-center pr-6 opacity-70 lg:flex xl:pr-10"
         style={{
@@ -33,22 +34,25 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-[1440px] px-6 pb-16 pt-14 md:px-10 md:pb-20 md:pt-20">
-        <div className="rise eyebrow text-[12px] text-accent-2">
+      <div className="relative mx-auto max-w-[1440px] px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
+        <div className="rise eyebrow text-[11px] text-accent-2">
           Automated forex strategy
         </div>
-        <h1 className="rise mt-5 text-6xl font-black leading-[0.92] tracking-tighter sm:text-7xl md:text-8xl lg:text-[9rem]">
+
+        <h1 className="rise mt-4 text-5xl font-black leading-[0.92] tracking-tighter sm:text-6xl md:text-8xl lg:text-[9rem]">
           Forex<span className="text-accent-2">DNA</span>
         </h1>
+
         <p
-          className="rise mt-5 max-w-xl text-xl leading-relaxed text-text-muted md:text-2xl"
+          className="rise mt-4 max-w-xl text-base leading-relaxed text-text-muted sm:text-xl md:text-2xl"
           style={{ animationDelay: "0.08s" }}
         >
           Retail access to algorithmic trading — an automated mean-reversion
           strategy on curated FX pairs, wrapped in a risk layer.
         </p>
+
         <div
-          className="rise mt-8 flex flex-wrap items-center gap-5"
+          className="rise mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
           style={{ animationDelay: "0.16s" }}
         >
           <Link
@@ -62,12 +66,13 @@ export default function Hero() {
           </span>
         </div>
 
+        {/* Stats — 3 equal columns on mobile, no wrapping */}
         <div
-          className="rise mt-12 grid max-w-3xl grid-cols-2 gap-8 border-t border-white/10 pt-8 sm:grid-cols-3"
+          className="rise mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-8"
           style={{ animationDelay: "0.24s" }}
         >
-          <Stat label="Strategy" value="Mean reversion · FX" />
-          <Stat label="Pairs" value="Curated, ranging" />
+          <Stat label="Strategy" value="Mean reversion" />
+          <Stat label="Pairs" value="Curated FX" />
           <Stat label="Access" value="By request" />
         </div>
       </div>
@@ -77,9 +82,9 @@ export default function Hero() {
 
 function Stat({ label, value }) {
   return (
-    <div className="flex flex-col gap-2">
-      <span className="eyebrow text-[11px] text-text-faint">{label}</span>
-      <span className="font-mono-tight text-sm text-text">{value}</span>
+    <div className="flex flex-col gap-1.5">
+      <span className="eyebrow text-[10px] text-text-faint">{label}</span>
+      <span className="font-mono-tight text-xs text-text sm:text-sm">{value}</span>
     </div>
   );
 }
