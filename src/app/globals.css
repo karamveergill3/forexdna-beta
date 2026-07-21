@@ -17,6 +17,36 @@
   --color-high: #1d9e75;
 }
 
+:root[data-theme="light"] {
+  --color-ink: #f4f6fa;
+  --color-panel: #ffffff;
+  --color-panel-strong: #eef1fb;
+  --color-line: rgba(10, 15, 25, 0.1);
+  --color-line-soft: rgba(10, 15, 25, 0.06);
+  --color-text: #0b0e13;
+  --color-text-muted: #3c4451;
+  --color-text-dim: #5b636f;
+  --color-text-faint: #7b8390;
+  --color-accent: #1e66ff;
+  --color-accent-2: #1552cf;
+  --color-low: #b26a12;
+  --color-mid: #c23b3a;
+  --color-high: #157a58;
+}
+
+/* A handful of components use raw border-white/X and bg-white/X utilities
+   (fine on the dark theme's near-black background). This keeps them from
+   disappearing into the light theme's near-white background. */
+:root[data-theme="light"] [class*="border-white/"] {
+  border-color: var(--color-line) !important;
+}
+:root[data-theme="light"] [class*="bg-white/"] {
+  background-color: var(--color-line-soft) !important;
+}
+:root[data-theme="light"] [class*="divide-white/"] > * {
+  border-color: var(--color-line) !important;
+}
+
 @theme inline {
   --color-ink: var(--color-ink);
   --color-panel: var(--color-panel);

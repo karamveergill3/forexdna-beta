@@ -21,6 +21,11 @@ just captures signups and each person's starting risk preference.
 3. Open the **SQL Editor**, paste in the contents of `supabase/schema.sql`,
    and click **Run**. This creates the `profiles` table and the trigger
    that fills it in automatically on signup.
+3b. **Required for account deletion to work:** on the same API settings
+   page, copy the **service_role** key (labeled "secret," not the
+   "publishable"/anon one) — you'll need it for step 6 below. Never share
+   this key or put it in a `NEXT_PUBLIC_` variable; it bypasses all row
+   security.
 4. Optional, recommended before real users sign up: go to **Authentication → Providers
    → Email** and decide whether you want "Confirm email" on. If it's on,
    new users get a 8-digit code (see step 5 below) before they can sign in.
@@ -69,6 +74,7 @@ git push -u origin main
    `.env.local`:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY` (from step 3b — needed for account deletion)
 3. Deploy. Vercel gives you a `*.vercel.app` URL immediately; add a custom
    domain later from the project's **Settings → Domains**.
 4. In Supabase, go to **Authentication → URL Configuration** and set the

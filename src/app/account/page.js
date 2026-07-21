@@ -3,6 +3,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import SignOutButton from "@/components/SignOutButton";
 import AccountSettingsForm from "@/components/AccountSettingsForm";
+import ThemeToggle from "@/components/ThemeToggle";
+import DangerZone from "@/components/DangerZone";
 
 export const metadata = {
   title: "Account settings — ForexDNA",
@@ -21,9 +23,17 @@ export default async function AccountPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name")
+    .select("full_name, created_at")
     .eq("id", user.id)
     .single();
+
+  const memberSince = profile?.created_at
+    ? new Date(profile.created_at).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    : null;
 
   return (
     <div className="min-h-screen">
@@ -42,12 +52,23 @@ export default async function AccountPage() {
       </div>
 
       <div className="mx-auto max-w-2xl px-6 py-14 md:px-10">
-        <span className="eyebrow text-[11px] text-accent-2">Settings</span>
-        <h1 className="mt-3 text-3xl font-extrabold tracking-tight">
-          Account
-        </h1>
-        <div className="mt-8">
-          <AccountSettingsForm initialName={profile?.full_name} email={user.email} />
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="eyebrow text-[11px] text-accent-2">Settings</span>
+            <h1 className="mt-3 text-3xl font-extrabold tracking-tight">
+              Account
+            </h1>
+          </div>
+          <ThemeToggle />
+        </div>
+
+        <div className="mt-8 flex flex-col gap-6">
+          <AccountSettingsForm
+            initialName={profile?.full_name}
+            email={user.email}
+            memberSince={memberSince}
+          />
+          <DangerZone />
         </div>
       </div>
     </div>

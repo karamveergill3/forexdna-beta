@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 const inputClass =
   "w-full rounded-lg border border-white/10 bg-ink px-4 py-3.5 text-sm text-text placeholder:text-text-faint outline-none transition focus:border-accent-2/60 focus:ring-1 focus:ring-accent-2/60";
 
-export default function AccountSettingsForm({ initialName, email }) {
+export default function AccountSettingsForm({ initialName, email, memberSince }) {
   const supabase = createClient();
 
   const [fullName, setFullName] = useState(initialName || "");
@@ -70,6 +70,11 @@ export default function AccountSettingsForm({ initialName, email }) {
               className={`${inputClass} cursor-not-allowed opacity-60`}
             />
           </div>
+          {memberSince && (
+            <p className="-mt-2 text-xs text-text-faint">
+              Member since {memberSince}
+            </p>
+          )}
           <div>
             <label htmlFor="fullName" className="mb-1.5 block text-xs text-text-dim">
               Full name

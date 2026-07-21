@@ -1,5 +1,6 @@
 import { Saira, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import ThemeScript from "@/components/ThemeScript";
 
 const saira = Saira({
   variable: "--font-saira",
@@ -22,6 +23,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${saira.variable} ${jbMono.variable} h-full`}>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-full flex flex-col antialiased bg-ink text-text">
         {children}
       </body>
