@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Reveal from "./Reveal";
+import MagneticButton from "./MagneticButton";
 
 export default function FinalCta() {
   return (
@@ -15,12 +15,12 @@ export default function FinalCta() {
           Sign up and be first in line as the dashboard, risk
           calculator, and live copytrading roll out.
         </p>
-        <Link
+        <MagneticButton
           href="/signup"
           className="btn-primary mt-8 inline-block rounded-lg px-9 py-4 text-sm font-semibold tracking-wide text-white"
         >
           Sign up
-        </Link>
+        </MagneticButton>
       </Reveal>
     </section>
   );

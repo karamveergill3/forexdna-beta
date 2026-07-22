@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import TiltCard from "./TiltCard";
+import CountUp from "./CountUp";
 
 const steps = [
   {
@@ -34,11 +35,14 @@ export default function TrustSection() {
           Built, run, and re-tested by AI.
         </h2>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {steps.map((s) => (
+          {steps.map((s, i) => (
             <TiltCard key={s.n} className="surface rounded-xl p-7">
-              <span className="font-mono-tight text-4xl font-bold text-accent-2">
-                {s.n}
-              </span>
+              <CountUp
+                value={i + 1}
+                duration={900}
+                format={(n) => String(Math.round(n)).padStart(2, "0")}
+                className="font-mono-tight text-4xl font-bold text-accent-2"
+              />
               <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
               <p className="mt-3 text-base leading-relaxed text-text-dim">
                 {s.text}

@@ -1,7 +1,7 @@
-import Link from "next/link";
 import CandlestickArt from "./CandlestickArt";
 import ScrambleText from "./ScrambleText";
 import MeshBackground from "./MeshBackground";
+import MagneticButton from "./MagneticButton";
 
 export default function Hero() {
   return (
@@ -71,12 +71,12 @@ export default function Hero() {
           className="rise mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
           style={{ animationDelay: "0.16s" }}
         >
-          <Link
+          <MagneticButton
             href="/signup"
             className="btn-primary rounded-lg px-8 py-4 text-sm font-semibold tracking-wide text-white"
           >
             Sign up
-          </Link>
+          </MagneticButton>
           <span className="eyebrow text-[11px] text-text-faint">
             No trading experience required
           </span>

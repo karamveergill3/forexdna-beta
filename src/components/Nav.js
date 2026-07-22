@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import MagneticButton from "./MagneticButton";
 
 export default async function Nav() {
   const supabase = await createClient();
@@ -16,31 +17,33 @@ export default async function Nav() {
         <div className="flex items-center gap-6">
           <Link
             href="/faq"
-            className="hidden text-sm text-text-dim transition hover:text-text sm:inline"
+            className="group relative hidden text-sm text-text-dim transition hover:text-text sm:inline"
           >
             FAQ
+            <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent-2 transition-transform duration-300 ease-out group-hover:scale-x-100" />
           </Link>
           {user ? (
-            <Link
+            <MagneticButton
               href="/welcome"
               className="btn-primary rounded-lg px-6 py-2.5 text-sm font-semibold tracking-wide text-white"
             >
               Dashboard
-            </Link>
+            </MagneticButton>
           ) : (
             <>
               <Link
                 href="/login"
-                className="text-sm text-text-dim transition hover:text-text"
+                className="group relative text-sm text-text-dim transition hover:text-text"
               >
                 Sign in
+                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent-2 transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </Link>
-              <Link
+              <MagneticButton
                 href="/signup"
                 className="btn-primary rounded-lg px-6 py-2.5 text-sm font-semibold tracking-wide text-white"
               >
                 Sign up
-              </Link>
+              </MagneticButton>
             </>
           )}
         </div>

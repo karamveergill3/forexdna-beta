@@ -144,7 +144,7 @@ body {
   transform: translateY(-1px);
 }
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.96);
 }
 
 /* Signature hero motif: level lines + scanning sweep */

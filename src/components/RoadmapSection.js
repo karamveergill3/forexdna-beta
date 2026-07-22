@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import TiltCard from "./TiltCard";
+import CountUp from "./CountUp";
 
 const items = [
   {
@@ -42,11 +43,14 @@ export default function RoadmapSection() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {items.map((item) => (
+          {items.map((item, i) => (
             <TiltCard key={item.n} className="surface flex flex-col rounded-xl p-7">
-              <span className="font-mono-tight text-4xl font-bold text-accent-2">
-                {item.n}
-              </span>
+              <CountUp
+                value={i + 1}
+                duration={900}
+                format={(n) => String(Math.round(n)).padStart(2, "0")}
+                className="font-mono-tight text-4xl font-bold text-accent-2"
+              />
               <h3 className="mt-5 text-xl font-semibold">{item.title}</h3>
               <p className="mt-3 text-base leading-relaxed text-text-dim">
                 {item.text}
