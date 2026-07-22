@@ -9,8 +9,7 @@ export default function FinalCta() {
       <Reveal className="relative mx-auto max-w-3xl px-6 py-20 text-center md:px-10 md:py-24">
         <span className="eyebrow text-[12px] text-accent-2">ForexDNA</span>
         <h2 className="mt-5 text-5xl font-black leading-[1.02] tracking-tight md:text-7xl">
-          The grid strategy that&nbsp;
-          <span className="text-gradient-blue-green">doesn&rsquo;t blow up.</span>
+          The <span className="text-gradient-blue-green">invincible</span> grid strategy.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-muted">
           Sign up and be first in line as the dashboard, risk
