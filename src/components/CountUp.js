@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function CountUp({ value, duration = 1300, format, className = "", style }) {
+export default function CountUp({ value, duration = 1300, format, padStart, className = "", style }) {
   const ref = useRef(null);
   const [started, setStarted] = useState(false);
   const [display, setDisplay] = useState(0);
@@ -39,7 +39,11 @@ export default function CountUp({ value, duration = 1300, format, className = ""
     return () => cancelAnimationFrame(raf);
   }, [started, value, duration]);
 
-  const formatted = format ? format(display) : Math.round(display).toLocaleString();
+  const formatted = format
+    ? format(display)
+    : padStart
+    ? String(Math.round(display)).padStart(padStart, "0")
+    : Math.round(display).toLocaleString();
 
   return (
     <span ref={ref} className={className} style={style}>

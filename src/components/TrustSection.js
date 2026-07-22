@@ -40,7 +40,7 @@ export default function TrustSection() {
               <CountUp
                 value={i + 1}
                 duration={900}
-                format={(n) => String(Math.round(n)).padStart(2, "0")}
+                padStart={2}
                 className="font-mono-tight text-4xl font-bold text-accent-2"
               />
               <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
