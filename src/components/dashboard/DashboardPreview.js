@@ -11,7 +11,8 @@ import {
   sampleAccount,
   balanceCurve,
   closedTrades,
-  dailyPnl,
+  dailyPnlJune2026,
+  dailyPnlJuly2026,
   statistics,
   statTrends,
   riskStack,
@@ -78,10 +79,13 @@ export default function DashboardPreview() {
       {/* Trading journal + calendar */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
         <div className="glass-card rounded-xl p-6 self-start">
-          <div className="mb-4 text-sm font-semibold">Closed trades</div>
-          <div className="overflow-x-auto">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="text-sm font-semibold">Closed trades</span>
+            <span className="eyebrow text-[10px] text-text-faint">{closedTrades.length} trades</span>
+          </div>
+          <div className="max-h-[480px] overflow-y-auto overflow-x-auto">
             <table className="w-full text-sm">
-              <thead>
+              <thead className="sticky top-0 z-10 bg-panel">
                 <tr className="eyebrow text-left text-[10px] text-text-faint">
                   <th className="pb-3 pr-4 font-medium">Side</th>
                   <th className="pb-3 pr-4 font-medium">Closed</th>
@@ -95,7 +99,7 @@ export default function DashboardPreview() {
                   <tr
                     key={t.id}
                     className="rise border-t border-white/8"
-                    style={{ animationDelay: `${i * 55}ms` }}
+                    style={{ animationDelay: `${Math.min(i, 20) * 55}ms` }}
                   >
                     <td className="py-3 pr-4">
                       <span
@@ -124,8 +128,13 @@ export default function DashboardPreview() {
           </div>
         </div>
 
-        <div className="glass-card rounded-xl p-6 self-start">
-          <PnlCalendar month={8} year={2025} dailyPnl={dailyPnl} />
+        <div className="flex flex-col gap-6">
+          <div className="glass-card rounded-xl p-6 self-start">
+            <PnlCalendar month={6} year={2026} dailyPnl={dailyPnlJuly2026} />
+          </div>
+          <div className="glass-card rounded-xl p-6 self-start">
+            <PnlCalendar month={5} year={2026} dailyPnl={dailyPnlJune2026} />
+          </div>
         </div>
       </div>
 

@@ -19,14 +19,17 @@ export default function PnlCalendar({ month, year, dailyPnl }) {
   const monthLabel = firstOfMonth.toLocaleString("en-US", { month: "long", year: "numeric" });
 
   // Monthly summary, computed from the same daily data driving the grid.
-  const entries = Object.values(dailyPnl).filter((e) => e.trades > 0);
-  const totalPnl = entries.reduce((sum, e) => sum + e.pnl, 0);
-  const bestDay = entries.reduce((best, e) => (e.pnl > (best?.pnl ?? -Infinity) ? e : best), null);
-  const tradingDays = entries.length;
+  // Every day with a balance change counts toward the total (a day can move
+  // the balance via swap alone, with no trade actually closing that day) —
+  // "trades" only gates the separate "Trading days" count below.
+  const allEntries = Object.values(dailyPnl);
+  const totalPnl = allEntries.reduce((sum, e) => sum + e.pnl, 0);
+  const bestDay = allEntries.reduce((best, e) => (e.pnl > (best?.pnl ?? -Infinity) ? e : best), null);
+  const tradingDays = allEntries.filter((e) => e.trades > 0).length;
 
   // Heatmap intensity — scale color strength by how big that day's P&L was
   // relative to the month's biggest move, so standout days actually stand out.
-  const maxAbsPnl = Math.max(1, ...entries.map((e) => Math.abs(e.pnl)));
+  const maxAbsPnl = Math.max(1, ...allEntries.map((e) => Math.abs(e.pnl)));
 
   return (
     <div>
