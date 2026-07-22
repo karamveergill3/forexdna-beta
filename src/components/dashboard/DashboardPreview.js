@@ -128,11 +128,11 @@ export default function DashboardPreview() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6">
-          <div className="glass-card rounded-xl p-6 self-start">
+        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:thin]">
+          <div className="glass-card w-full shrink-0 snap-center rounded-xl p-6">
             <PnlCalendar month={6} year={2026} dailyPnl={dailyPnlJuly2026} />
           </div>
-          <div className="glass-card rounded-xl p-6 self-start">
+          <div className="glass-card w-full shrink-0 snap-center rounded-xl p-6">
             <PnlCalendar month={5} year={2026} dailyPnl={dailyPnlJune2026} />
           </div>
         </div>

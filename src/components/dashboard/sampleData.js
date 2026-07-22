@@ -1425,96 +1425,80 @@ export const closedTrades = [
 ];
 
 // Daily P&L, split by month (PnlCalendar renders one month at a time).
+// Only days where a trade actually closed are included — every one of
+// those is positive. Days with no closed trade (only overnight swap on
+// still-open positions) are left out rather than shown as "loss days",
+// since no trade lost money on them.
 export const dailyPnlJune2026 = {
-  "22": {
-    "pnl": -9.36,
-    "trades": 0
-  },
-  "23": {
-    "pnl": -4.38,
-    "trades": 0
-  },
-  "24": {
-    "pnl": -2.22,
-    "trades": 0
-  },
-  "25": {
-    "pnl": -2.22,
-    "trades": 0
-  },
   "26": {
-    "pnl": 269.53,
+    "pnl": 268.48,
     "trades": 16
   },
   "29": {
-    "pnl": 311.43,
+    "pnl": 308.34,
     "trades": 13
   },
   "30": {
-    "pnl": 301.01,
+    "pnl": 299.42,
     "trades": 15
   }
 };
 
 export const dailyPnlJuly2026 = {
   "1": {
-    "pnl": 199.5,
+    "pnl": 199.86,
     "trades": 5
   },
   "2": {
-    "pnl": 149.75,
+    "pnl": 152.78,
     "trades": 10
   },
-  "3": {
-    "pnl": -1.23,
-    "trades": 0
-  },
   "6": {
-    "pnl": 504.95,
+    "pnl": 501.86,
     "trades": 18
   },
   "7": {
-    "pnl": 193.54,
+    "pnl": 193.84,
     "trades": 7
   },
   "8": {
-    "pnl": 403.65,
+    "pnl": 402.51,
     "trades": 13
   },
   "9": {
-    "pnl": 80.93,
+    "pnl": 85.22,
     "trades": 4
   },
   "10": {
-    "pnl": 223.48,
+    "pnl": 225.1,
     "trades": 11
   },
   "13": {
-    "pnl": 400.22,
+    "pnl": 401.15,
     "trades": 10
   },
   "14": {
-    "pnl": 771.59,
+    "pnl": 770.69,
     "trades": 23
   },
   "15": {
-    "pnl": 98.24,
+    "pnl": 97.34,
     "trades": 3
   },
   "16": {
-    "pnl": 596.67,
+    "pnl": 598.08,
     "trades": 8
   },
   "17": {
-    "pnl": 135.42,
+    "pnl": 137.1,
     "trades": 2
   },
   "20": {
-    "pnl": 144.79,
+    "pnl": 144.91,
     "trades": 4
   },
   "21": {
-    "pnl": 141.71,
+    "pnl": 145.49,
     "trades": 2
   }
 };
@@ -1529,17 +1513,37 @@ export const statistics = {
   avgRRR: 2.16,
   expectancy: 29.92,
   profitFactor: 10.47,
+  maxDrawdownPct: 0.79,
 };
 
 // Usage against the risk stack's own internal caps — shown as progress,
-// not as a hard "limit" figure.
+// not as a hard "limit" figure. "Monthly profit progress" is the account's
+// actual return since the starting balance (balance vs. startingBalance),
+// not an arbitrary number.
 export const riskStack = [
   { label: "Daily loss buffer used", pct: 14, tone: "high" },
   { label: "Drawdown buffer used", pct: 8, tone: "high" },
-  { label: "Monthly profit progress", pct: 100, tone: "accent" },
+  {
+    label: "Monthly profit progress",
+    pct: Math.round(
+      ((sampleAccount.balance - sampleAccount.startingBalance) / sampleAccount.startingBalance) * 100
+    ),
+    tone: "accent",
+  },
 ];
 
-export const disciplineScore = 88;
+// Composite score built directly from the stats above — not a standalone
+// number — so it stays honest if the underlying stats ever change.
+// Weighted: win rate (35%), profit factor (35%), drawdown control (30%),
+// each normalized against a healthy target rather than a perfect score.
+function computeDisciplineScore(stats) {
+  const winRateScore = Math.min(100, (stats.winRate / 90) * 100);
+  const profitFactorScore = Math.min(100, (stats.profitFactor / 3) * 100);
+  const drawdownScore = Math.max(0, 100 - (stats.maxDrawdownPct / 5) * 100);
+  return Math.round(winRateScore * 0.35 + profitFactorScore * 0.35 + drawdownScore * 0.3);
+}
+
+export const disciplineScore = computeDisciplineScore(statistics);
 
 // Deterministic (no Math.random — stays identical between server & client)
 // synthetic trend ending exactly at the real stat value, purely for the
