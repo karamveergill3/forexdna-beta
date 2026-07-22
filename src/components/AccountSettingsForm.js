@@ -13,7 +13,9 @@ export default function AccountSettingsForm({ initialName, email, memberSince })
   const [nameStatus, setNameStatus] = useState("idle");
   const [nameError, setNameError] = useState("");
 
+  const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordStatus, setPasswordStatus] = useState("idle");
   const [passwordError, setPasswordError] = useState("");
 
@@ -42,8 +44,27 @@ export default function AccountSettingsForm({ initialName, email, memberSince })
 
   async function handlePasswordSubmit(e) {
     e.preventDefault();
-    setPasswordStatus("loading");
     setPasswordError("");
+
+    if (password !== confirmPassword) {
+      setPasswordError("New passwords don't match.");
+      return;
+    }
+
+    setPasswordStatus("loading");
+
+    // Re-prove identity with the current password before changing anything —
+    // a valid session alone isn't enough for a sensitive action like this.
+    const { error: verifyError } = await supabase.auth.signInWithPassword({
+      email,
+      password: currentPassword,
+    });
+
+    if (verifyError) {
+      setPasswordStatus("error");
+      setPasswordError("Current password is incorrect.");
+      return;
+    }
 
     const { error } = await supabase.auth.updateUser({ password });
 
@@ -52,7 +73,14 @@ export default function AccountSettingsForm({ initialName, email, memberSince })
       setPasswordError(error.message);
       return;
     }
+
+    // Log out any other devices/browsers that were signed in, since the
+    // password just changed. Keeps this current session active.
+    await supabase.auth.signOut({ scope: "others" });
+
+    setCurrentPassword("");
     setPassword("");
+    setConfirmPassword("");
     setPasswordStatus("saved");
     setTimeout(() => setPasswordStatus("idle"), 2000);
   }
@@ -103,6 +131,20 @@ export default function AccountSettingsForm({ initialName, email, memberSince })
         <div className="mb-4 text-sm font-semibold">Password</div>
         <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-4">
           <div>
+            <label htmlFor="currentPassword" className="mb-1.5 block text-xs text-text-dim">
+              Current password
+            </label>
+            <input
+              id="currentPassword"
+              type="password"
+              required
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              className={inputClass}
+              placeholder="Enter your current password"
+            />
+          </div>
+          <div>
             <label htmlFor="newPassword" className="mb-1.5 block text-xs text-text-dim">
               New password
             </label>
@@ -115,6 +157,21 @@ export default function AccountSettingsForm({ initialName, email, memberSince })
               onChange={(e) => setPassword(e.target.value)}
               className={inputClass}
               placeholder="At least 8 characters"
+            />
+          </div>
+          <div>
+            <label htmlFor="confirmNewPassword" className="mb-1.5 block text-xs text-text-dim">
+              Confirm new password
+            </label>
+            <input
+              id="confirmNewPassword"
+              type="password"
+              required
+              minLength={8}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className={inputClass}
+              placeholder="Re-enter your new password"
             />
           </div>
           {passwordStatus === "error" && (
