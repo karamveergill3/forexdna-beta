@@ -6,7 +6,7 @@ export default function AuthShell({ eyebrow, title, subtitle, children, footer }
       <div className="grid-field pointer-events-none absolute inset-0 opacity-50" />
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-6 md:px-10">
         <div className="flex items-center justify-between py-6">
-          <Link href="/" className="text-lg font-black tracking-tight">
+          <Link href="/" className="text-lg font-extrabold tracking-tight">
             Forex<span className="text-accent-2">DNA</span>
           </Link>
         </div>

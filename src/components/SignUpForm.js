@@ -85,6 +85,10 @@ export default function SignUpForm() {
           Enter it below to finish setting up your account.
         </div>
 
+        <p className="text-xs text-text-dim">
+          Don&rsquo;t see it? Check your junk or spam folder — it can sometimes land there.
+        </p>
+
         <div>
           <label htmlFor="code" className="mb-1.5 block text-xs text-text-dim">
             Verification code
@@ -183,7 +187,7 @@ export default function SignUpForm() {
         className="btn-primary mt-3 flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold tracking-wide text-white disabled:opacity-60"
       >
         {status === "loading" && <Spinner />}
-        {status === "loading" ? "Creating account…" : "Request access"}
+        {status === "loading" ? "Creating account…" : "Sign up"}
       </button>
     </form>
   );

@@ -3,14 +3,14 @@ import AuthShell from "@/components/AuthShell";
 import SignUpForm from "@/components/SignUpForm";
 
 export const metadata = {
-  title: "Request access — ForexDNA",
+  title: "Sign up — ForexDNA",
 };
 
 export default function SignUpPage() {
   return (
     <AuthShell
       eyebrow="Get started"
-      title="Request access"
+      title="Sign up"
       subtitle="This sets up your account. Live trading connects once your access opens."
       footer={
         <>
