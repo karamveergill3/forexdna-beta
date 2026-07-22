@@ -9,9 +9,9 @@ export default function ScrambleText({
   text,
   className = "",
   startDelay = 0,
-  staggerPerChar = 85, // ms between each character's turn — creates the cascade
-  settleDuration = 520, // how long each character spends unsettled before locking
-  shuffleEvery = 65, // ms between glyph swaps — slower reads as more deliberate
+  staggerPerChar = 32, // ms between each character's turn — creates the cascade
+  settleDuration = 200, // how long each character spends unsettled before locking
+  shuffleEvery = 45, // ms between glyph swaps — slower reads as more deliberate
 }) {
   const [display, setDisplay] = useState(text);
   const [settled, setSettled] = useState(true);

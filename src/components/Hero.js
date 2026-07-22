@@ -55,8 +55,8 @@ export default function Hero() {
           className="rise mt-4 font-extrabold leading-none tracking-tighter"
           style={{ fontSize: "clamp(2.75rem, 0.6rem + 9.4vw, 9rem)" }}
         >
-          <ScrambleText text="Forex" startDelay={350} />
-          <ScrambleText text="DNA" className="text-gradient-blue-green pr-[0.06em]" startDelay={350 + 5 * 85} />
+          <ScrambleText text="Forex" startDelay={60} />
+          <ScrambleText text="DNA" className="text-gradient-blue-green pr-[0.06em]" startDelay={60 + 5 * 32} />
         </h1>
 
         <p
