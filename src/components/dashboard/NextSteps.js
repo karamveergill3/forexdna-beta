@@ -3,6 +3,7 @@ const items = [
     n: "01",
     title: "You're on the list",
     text: "Your account is created and confirmed — nothing else needed from you right now.",
+    done: true,
   },
   {
     n: "02",
@@ -23,9 +24,19 @@ export default function NextSteps() {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {items.map((item) => (
           <div key={item.n}>
-            <span className="font-mono-tight text-2xl font-bold text-accent-2">
-              {item.n}
-            </span>
+            {item.done ? (
+              <span
+                className="flex h-8 w-8 items-center justify-center rounded-full text-base font-bold"
+                style={{ background: "var(--color-high)", color: "#06110c" }}
+                aria-label="Done"
+              >
+                ✓
+              </span>
+            ) : (
+              <span className="font-mono-tight text-2xl font-bold text-accent-2">
+                {item.n}
+              </span>
+            )}
             <h3 className="mt-2 text-sm font-semibold">{item.title}</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-text-dim">
               {item.text}

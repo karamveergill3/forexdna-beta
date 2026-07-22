@@ -143,7 +143,14 @@ export default function DashboardPreview() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           <StatBox small label="Win rate" countValue={statistics.winRate} countFormat={(n) => `${n.toFixed(1)}%`} tone="high" trend={statTrends.winRate} />
           <StatBox small label="Avg profit" countValue={statistics.avgProfit} countFormat={fmt} tone="high" trend={statTrends.avgProfit} />
-          <StatBox small label="Avg loss" countValue={statistics.avgLoss} countFormat={fmt} tone="mid" trend={statTrends.avgLoss} />
+          <StatBox
+            small
+            label="Avg loss"
+            countValue={statistics.avgLoss}
+            countFormat={(n) => `$${Math.abs(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+            tone="mid"
+            trend={statTrends.avgLoss}
+          />
           <StatBox small label="Trades" countValue={statistics.numberOfTrades} countFormat={(n) => Math.round(n)} trend={statTrends.numberOfTrades} />
           <StatBox small label="Lots" countValue={statistics.lots} countFormat={(n) => n.toFixed(2)} trend={statTrends.lots} />
           <StatBox small label="Sharpe ratio" countValue={statistics.sharpe} countFormat={(n) => n.toFixed(2)} tone="high" trend={statTrends.sharpe} />

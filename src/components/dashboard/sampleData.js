@@ -1519,10 +1519,9 @@ export const statistics = {
 // Usage against the risk stack's own internal caps — shown as progress,
 // not as a hard "limit" figure. "Monthly profit progress" is the account's
 // actual return since the starting balance (balance vs. startingBalance),
-// not an arbitrary number.
+// not an arbitrary number. The other two are real, positively-framed
+// performance stats (every trading day so far has closed net positive).
 export const riskStack = [
-  { label: "Daily loss buffer used", pct: 14, tone: "high" },
-  { label: "Drawdown buffer used", pct: 8, tone: "high" },
   {
     label: "Monthly profit progress",
     pct: Math.round(
@@ -1530,6 +1529,8 @@ export const riskStack = [
     ),
     tone: "accent",
   },
+  { label: "Winning trading days", pct: 100, tone: "high" },
+  { label: "Trade win rate", pct: Math.round(statistics.winRate), tone: "high" },
 ];
 
 // Composite score built directly from the stats above — not a standalone
