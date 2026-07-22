@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 const inputClass =
   "w-full rounded-lg border border-white/10 bg-ink px-4 py-3.5 text-sm text-text placeholder:text-text-faint outline-none transition focus:border-accent-2/60 focus:ring-1 focus:ring-accent-2/60";
 
 export default function AccountSettingsForm({ initialName, email, memberSince }) {
+  const router = useRouter();
   const supabase = createClient();
 
   const [fullName, setFullName] = useState(initialName || "");
@@ -39,6 +41,7 @@ export default function AccountSettingsForm({ initialName, email, memberSince })
       return;
     }
     setNameStatus("saved");
+    router.refresh();
     setTimeout(() => setNameStatus("idle"), 2000);
   }
 
