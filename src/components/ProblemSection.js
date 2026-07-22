@@ -7,7 +7,7 @@ const problems = [
   },
   {
     label: "Signal groups",
-    text: "Copy-signal groups are a minefield — they still expect you to place and manage the trade yourself.",
+    text: "Copy-signal groups are a minefield: they still expect you to place and manage the trade yourself.",
   },
   {
     label: "Inconsistent execution",

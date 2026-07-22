@@ -6,11 +6,11 @@ export default function Footer() {
       <div className="mx-auto max-w-[1440px] px-6 pt-16 md:px-10">
         <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-12 sm:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Link href="/" className="text-lg font-black tracking-tight">
+            <Link href="/" className="text-lg font-extrabold tracking-tight">
               Forex<span className="text-accent-2">DNA</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-text-dim">
-              Retail access to algorithmic trading — an automated
+              Retail access to algorithmic trading: an automated
               mean-reversion strategy on curated FX pairs.
             </p>
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/signup" className="hover:text-text">
-                  Request access
+                  Sign up
                 </Link>
               </li>
             </ul>

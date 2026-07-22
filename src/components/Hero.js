@@ -52,7 +52,7 @@ export default function Hero() {
         </div>
 
         <h1
-          className="rise mt-4 font-black leading-none tracking-tighter"
+          className="rise mt-4 font-extrabold leading-none tracking-tighter"
           style={{ fontSize: "clamp(2.75rem, 0.6rem + 9.4vw, 9rem)" }}
         >
           <ScrambleText text="Forex" startDelay={350} />
@@ -63,7 +63,7 @@ export default function Hero() {
           className="rise mt-4 max-w-xl text-base leading-relaxed text-text-muted sm:text-xl md:text-2xl"
           style={{ animationDelay: "0.08s" }}
         >
-          Retail access to algorithmic trading — an automated mean-reversion
+          Retail access to algorithmic trading: an automated mean-reversion
           strategy on curated FX pairs, wrapped in a risk layer.
         </p>
 
@@ -75,7 +75,7 @@ export default function Hero() {
             href="/signup"
             className="btn-primary rounded-lg px-8 py-4 text-sm font-semibold tracking-wide text-white"
           >
-            Request access
+            Sign up
           </Link>
           <span className="eyebrow text-[11px] text-text-faint">
             No trading experience required

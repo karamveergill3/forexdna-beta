@@ -15,7 +15,7 @@ const items = [
   {
     n: "03",
     title: "Automated copytrading",
-    text: "The strategy trades, you never place an order manually — connected to your own broker account.",
+    text: "The strategy trades, you never place an order manually. It's connected to your own broker account.",
   },
 ];
 
@@ -37,7 +37,7 @@ export default function RoadmapSection() {
             </h2>
           </div>
           <p className="eyebrow max-w-xs text-[11px] text-text-faint">
-            Request access now to be first in line as each piece ships.
+            Sign up now to be first in line as each piece ships.
           </p>
         </div>
 

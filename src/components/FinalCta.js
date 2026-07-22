@@ -13,14 +13,14 @@ export default function FinalCta() {
           <span className="text-gradient-blue-green">doesn&rsquo;t blow up.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-muted">
-          Request access and be first in line as the dashboard, risk
+          Sign up and be first in line as the dashboard, risk
           calculator, and live copytrading roll out.
         </p>
         <Link
           href="/signup"
           className="btn-primary mt-8 inline-block rounded-lg px-9 py-4 text-sm font-semibold tracking-wide text-white"
         >
-          Request access
+          Sign up
         </Link>
       </Reveal>
     </section>
