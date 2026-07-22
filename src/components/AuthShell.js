@@ -9,6 +9,15 @@ export default function AuthShell({ eyebrow, title, subtitle, children, footer }
           <Link href="/" className="text-lg font-extrabold tracking-tight">
             Forex<span className="text-accent-2">DNA</span>
           </Link>
+          <Link
+            href="/"
+            aria-label="Close and return to homepage"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-text-dim transition hover:border-white/20 hover:text-text"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L15 15M15 1L1 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </Link>
         </div>
 
         <div className="flex flex-1 items-center justify-center py-12">
