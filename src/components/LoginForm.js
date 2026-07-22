@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import Spinner from "./Spinner";
 
@@ -55,9 +56,14 @@ export default function LoginForm() {
       </div>
 
       <div>
-        <label htmlFor="password" className="mb-1.5 block text-xs text-text-dim">
-          Password
-        </label>
+        <div className="mb-1.5 flex items-center justify-between">
+          <label htmlFor="password" className="block text-xs text-text-dim">
+            Password
+          </label>
+          <Link href="/forgot-password" className="text-xs text-accent-2 hover:underline">
+            Forgot password?
+          </Link>
+        </div>
         <input
           id="password"
           type="password"
