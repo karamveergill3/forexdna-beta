@@ -3,24 +3,37 @@ import MagneticButton from "./MagneticButton";
 
 export default function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-ink">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(30,102,255,0.18),rgba(30,102,255,0)_62%)]" />
-      <div className="mesh-blob mesh-blob-3 pointer-events-none opacity-[0.14]" style={{ background: "var(--color-high)", bottom: "-15%", right: "5%" }} />
-      <Reveal className="relative mx-auto max-w-3xl px-6 py-20 text-center md:px-10 md:py-24">
-        <span className="eyebrow text-[12px] text-accent-2">ForexDNA</span>
-        <h2 className="mt-5 text-5xl font-black leading-[1.02] tracking-tight md:text-7xl">
-          The <span className="text-gradient-blue-green">invincible</span> grid strategy.
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-muted">
-          Sign up and be first in line as the dashboard, risk
-          calculator, and live copytrading roll out.
-        </p>
-        <MagneticButton
-          href="/signup"
-          className="btn-primary mt-8 inline-block rounded-lg px-9 py-4 text-sm font-semibold tracking-wide text-white"
+    <section className="relative border-b border-white/10 bg-ink">
+      <Reveal className="mx-auto max-w-[560px] px-6 py-14 lg:max-w-[1080px] lg:px-10 lg:py-16">
+        <div
+          className="relative overflow-hidden rounded-2xl border border-accent/30 bg-panel p-9 shadow-[0_12px_40px_rgba(30,102,255,0.12)] lg:flex lg:items-center lg:justify-between lg:gap-14 lg:p-11"
         >
-          Sign up
-        </MagneticButton>
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(circle at 22% 0%, rgba(30,102,255,0.2), rgba(6,7,9,0) 66%)",
+            }}
+          />
+          <div className="relative">
+            <h2 className="max-w-md text-[32px] font-extrabold leading-[1.04] tracking-tight text-balance sm:text-[46px]">
+              Set up once,
+              <br />
+              <span className="text-accent-2">trade automatically.</span>
+            </h2>
+            <p className="mt-4 max-w-sm text-[17px] leading-relaxed text-text-muted">
+              Set up in minutes. From £500.
+            </p>
+          </div>
+          <div className="relative mt-6 lg:mt-0 lg:shrink-0">
+            <MagneticButton
+              href="/signup"
+              className="btn-primary block min-w-[220px] rounded-lg px-9 py-4 text-center text-sm font-semibold tracking-wide text-white"
+            >
+              Sign up
+            </MagneticButton>
+          </div>
+        </div>
       </Reveal>
     </section>
   );
